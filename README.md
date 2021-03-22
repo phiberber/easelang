@@ -1,6 +1,4 @@
-<p align="center">
-  <img width="200" height="200" src="https://i.imgur.com/P5afrnC.png">
-</p>
+<img width="200" height="200" src="https://i.imgur.com/4o8ZBbk.png">
 
 # Ian Programming Language
 
