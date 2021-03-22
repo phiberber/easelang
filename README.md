@@ -26,6 +26,4 @@ Currently we don't have any type of Demo available as Ian hasn't evolved that mu
 
 ## Collaborators
 
-[Arthur Ottoni](https://github.com/ArthurHydr)
-<br />
 [Phiberber](https://github.com/phiberber)
