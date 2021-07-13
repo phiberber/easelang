@@ -1,6 +1,6 @@
-# 👋 Welcome to the Ian Repository!
+# 👋 Welcome to the Ease Repository!
 
-Ian is a Strong Dynamic Typed programming language! If Tabnine your next lines, Ian will be able to guess your next types.
+Ease is a Strong Dynamically Typed programming language! If Tabnine your next lines, Ease will be able to guess your next types.
 
 ## Philosophy
 Our main objective is to create a programming language that can run both as a compild and interpreted language. We like to keep things simple, here is our philosophy:
