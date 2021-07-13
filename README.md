@@ -24,3 +24,4 @@ The first thing you can do is help we deciding a new name for the language, just
 ## Collaborators
 
 [Phiberber](https://github.com/phiberber)
+[Lain](https://github.com/howlain)
