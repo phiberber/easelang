@@ -1,0 +1,9 @@
+{
+  "name": "ease",
+  "version": "0.0.0",
+  "description": "Ease Programming Language",
+  "repository": "https://github.com/phiberber/ease.git",
+  "author": "phiberber <phiberberian@gmail.com>",
+  "type": "module",
+  "license": "MIT"
+}
