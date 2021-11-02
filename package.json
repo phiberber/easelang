@@ -4,7 +4,6 @@
   "description": "Ease Programming Language",
   "repository": "https://github.com/phiberber/ease.git",
   "author": "phiberber <phiberberian@gmail.com>",
-  "type": "module",
   "license": "MIT",
   "dependencies": {
     "ts-node": "^10.4.0",
