@@ -1,35 +1,45 @@
+import TokenType from "./tokenType";
+
 export default {
 
-    Space: ' ',
-    Assign: '=',
+    Space: new TokenType('Space', ' '),
+    Assign: new TokenType('Assign', '='),
 
-    OpenParenthesis: '(',
-    CloseParenthesis: ')',
+    OpenParenthesis: new TokenType('OpenParenthesis', '('),
+    CloseParenthesis: new TokenType('CloseParenthesis', ')'),
 
-    OpenBrackets: '{',
-    CloseBrackets: '}',
+    OpenBrackets: new TokenType('OpenBrackets', '{'),
+    CloseBrackets: new TokenType('CloseBrackets', '}'),
 
-    Comma: ',',
-    Colon: ':',
+    Comma: new TokenType('Comma', ','),
+    Colon: new TokenType('Colon', ':'),
 
-    If: 'if',
-    Else: 'else',
-    Break: 'break',
-    Pass: 'pass',
+    If: new TokenType('If', 'if'),
+    Else: new TokenType('Else', 'else'),
+    Break: new TokenType('Break', 'break'),
+    Pass: new TokenType('Pass', 'pass'),
 
-    TernaryOperator: '?:',
+    Ternary: new TokenType('Ternary', '?:'),
 
-    LineBreak: /\n|\n\r/,
+    LineBreak: new TokenType('LineBreak', /\n|\n\r/),
 
-    Number: /\d/,
-    Identifier: /\w/,
-    UnaryOperator: /\+\+|--/,
-    RelationalOperator: /<|<=|>|>=|==|!=/,
-    LogicalOperator: /[^~&|]/,
-    AssignmentOperator: /=|\+=|-=|\*=|\/=|%=/,
-    ArithmeticOperator: /[+-\/*%]/,
-    BitwiseOperator: /&|\||<<|>>|~|\^/,
+    Number: new TokenType('Number', /\d/),
+    Identifier: new TokenType('Identifier', /\w/),
+
+    Increment: new TokenType('Increment', '++'),
+    Decrease: new TokenType('Decrease', '--'),
+
+    Smaller: new TokenType('Smaller', '<'),
+    SmallerOrEqual: new TokenType('SmallerOrEqual', '<='),
+    Bigger: new TokenType('Bigger', '>'),
+    BiggerOrEqual: new TokenType('BiggerOrEqual', '>='),
+    Equals: new TokenType('Equals', '=='),
+    NotEquals: new TokenType('NotEquals', '!='),
+
+    PlusAssign: new TokenType("PlusAssign", "+="),
+    MinusAssign: new TokenType("MinusAssign", "-="),
+    MultiplyAssign: new TokenType("MultiplyAssign", "*="),
+    DivideAssign: new TokenType("DivideAssign", "/="),
+    RemainderAssign: new TokenType("RemainderAssign", "%=")
 
 }
-
-console.log(/[+-\/*]/.test('1 / 1 + 2 ( - 5 )'))

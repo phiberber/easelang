@@ -1,8 +1,15 @@
 class TokenType {
 
-    name //: String
-    content //: { string, regex }
+    public name: string
+    public content: string | RegExp
 
-    matches(code, startIndex) {}
+    public constructor(name: string, content: string | RegExp) {
+        this.name = name
+        this.content = content
+    }
+
+    public matches(code, startIndex) {}
 
 }
+
+export default TokenType
