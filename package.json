@@ -6,7 +6,7 @@
   "author": "phiberber <phiberberian@gmail.com>",
   "type": "module",
   "license": "MIT",
-  "peerDependencies": {
+  "dependencies": {
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"
   }
