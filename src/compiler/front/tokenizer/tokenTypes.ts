@@ -26,6 +26,12 @@ export default {
     Number: new TokenType('Number', /\d/),
     Identifier: new TokenType('Identifier', /\w/),
 
+    Plus: new TokenType('Plus', '+'),
+    Minus: new TokenType('Minus', '-'),
+    Divide: new TokenType('Divide', '/'),
+    Multiply: new TokenType('Multiply', '*'),
+    Remainder: new TokenType('Remainder', '%'),
+
     Increment: new TokenType('Increment', '++'),
     Decrease: new TokenType('Decrease', '--'),
 
