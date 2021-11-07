@@ -5,7 +5,7 @@ Ease is a Strong Dynamically Typed programming language! If Tabnine your next li
 ## Philosophy
 Our main objective is to create a programming language that can run both as a compild and interpreted language. We like to keep things simple, here is our philosophy:
 
-- Remove everything that isn't needed, even if it is part of the syntax.
+- Remove the most possible of the syntax, and make the syntax tags different from each other as possible.
 - Be a language that can run everywhere, without any proper installation.
 - Be a language that any beginner can understand.
 - Be the fastest possible, humans can make mistakes, but most of the times, we can solve them automatically.
@@ -24,4 +24,4 @@ The first thing you can do is help we deciding a new name for the language, just
 ## Collaborators
 
 [Phiberber](https://github.com/phiberber)
-[Lain](https://github.com/howlain)
+[Lain](https://github.com/gpeterin)
