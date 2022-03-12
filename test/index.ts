@@ -1,9 +1,9 @@
-import Interpreter from "../src/compiler/full/interpreter/Interpreter";
-import Lexer from "../src/compiler/front/lexer/Lexer";
-import Parser from "../src/compiler/front/parser/Parser";
+import Interpreter from "../src/interpreter/Interpreter";
+import Lexer from "../src/front/lexer/Lexer";
+import Parser from "../src/front/parser/Parser";
 import * as fs from "fs";
 
-const logs = false
+const logs = true
 const debug = false
 
 const file = fs.readFileSync("./test/samples/print.se", { encoding: 'utf-8' })
