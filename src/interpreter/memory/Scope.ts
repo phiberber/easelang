@@ -6,7 +6,7 @@ export interface ScopeReference<T> {
     has(): Boolean
 }
 
-export class Scope {
+export default class Scope {
 
     public type: ScopeType = "local"
 

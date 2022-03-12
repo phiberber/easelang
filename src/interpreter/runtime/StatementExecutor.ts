@@ -1,14 +1,14 @@
-import {ConditionalStatement} from "../../shared/nodes/statement/ConditionalStatement";
-import {Scope} from "../memory/Scope";
-import Block from "../../shared/nodes/Block";
-import {NewStatement} from "../../shared/nodes/statement/NewStatement";
-import {FunctionCall} from "../../shared/nodes/call/FunctionCall";
-import {RuntimeFunction} from "./declared/RuntimeFunction";
-import {computeNode} from "./NodeComputer";
-import {WhileStatement} from "../../shared/nodes/statement/WhileStatement";
-import {RuntimeClass} from "./declared/RuntimeClass";
-import {AssignStatement} from "../../shared/nodes/statement/AssignStatement";
-import {RuntimeVariable} from "./declared/RuntimeVariable";
+import ConditionalStatement from "@nodes/statement/ConditionalStatement";
+import AssignStatement from "@nodes/statement/AssignStatement";
+import WhileStatement from "@nodes/statement/WhileStatement";
+import NewStatement from "@nodes/statement/NewStatement";
+import FunctionCall from "@nodes/call/FunctionCall";
+import RuntimeFunction from "@interpreter/runtime/declared/RuntimeFunction";
+import RuntimeVariable from "@interpreter/runtime/declared/RuntimeVariable";
+import RuntimeClass from "@interpreter/runtime/declared/RuntimeClass";
+import computeNode from "@interpreter/runtime/NodeComputer";
+import Scope from "@interpreter/memory/Scope";
+import Block from "@nodes/Block";
 
 export function executeIf(statement: ConditionalStatement, scope: Scope): Boolean {
     if (statement.condition === undefined || computeNode(statement.condition, scope)) {

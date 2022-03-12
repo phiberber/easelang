@@ -1,8 +1,8 @@
-import {ParserNode} from "../ParserNode";
-import {Span} from "../../Span";
-import Tag from "../../Tag";
+import ParserNode from "@nodes/ParserNode";
+import Span from "@shared/Span";
+import Tag from "@shared/Tag";
 
-export abstract class Expression implements ParserNode {
+export default abstract class Expression implements ParserNode {
     public nodeType: string = "Expression"
     public abstract operator: Tag
     public abstract left: ParserNode

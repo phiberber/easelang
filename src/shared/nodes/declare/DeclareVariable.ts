@@ -1,12 +1,12 @@
-import {Span} from "../../Span";
-import {ParserNode} from "../ParserNode";
-import {Declare} from "./Declare";
-import Token from "../../Token";
-import Tag, {Modifiers} from "../../Tag";
+import Declare from "@nodes/declare/Declare";
+import ParserNode from "@nodes/ParserNode";
+import Tag, {Modifiers} from "@shared/Tag";
+import Token from "@shared/Token";
+import Span from "@shared/Span";
 
 type VariableType = typeof Tag.Variable | typeof Tag.Value | typeof Tag.Constant
 
-export class DeclareVariable extends Declare {
+export default class DeclareVariable extends Declare {
     public type: VariableType
     public identifier: Token<string>;
     public modifiers: typeof Modifiers;

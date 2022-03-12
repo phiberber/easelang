@@ -1,8 +1,8 @@
-import {ParserNode} from "../ParserNode";
-import {Span} from "../../Span";
-import Token from "../../Token";
+import ParserNode from "@nodes/ParserNode";
+import Span from "@shared/Span";
+import Token from "@shared/Token";
 
-export class AssignStatement implements ParserNode {
+export default class AssignStatement implements ParserNode {
     public nodeType: string = "AssignStatement"
     public assigned: Token<string>
     public operator: Token<string>

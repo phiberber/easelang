@@ -1,10 +1,10 @@
-import Parser from "../Parser";
-import {FunctionCall} from "../../../shared/nodes/call/FunctionCall";
-import {ParserNode} from "../../../shared/nodes/ParserNode";
-import Tag from "../../../shared/Tag";
-import {parseExpression} from "../expressions/ParseExpression";
+import parseExpression from "@front/parser/expressions/ParseExpression";
+import FunctionCall from "@nodes/call/FunctionCall";
+import ParserNode from "@nodes/ParserNode";
+import Parser from "@front/parser/Parser";
+import Tag from "@shared/Tag";
 
-export function parseFunctionCall(this: Parser): FunctionCall {
+export default function parseFunctionCall(this: Parser): FunctionCall {
     const parameters: ParserNode[] = []
     const functionName = this.match(Tag.Identifier)
     this.match(Tag.OpenParenthesis)

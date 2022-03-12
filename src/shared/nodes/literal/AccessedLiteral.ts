@@ -1,8 +1,8 @@
-import {Literal} from "./Literal";
-import {Span} from "../../Span";
-import {ParserNode} from "../ParserNode";
+import Literal from "@nodes/literal/Literal";
+import ParserNode from "@nodes/ParserNode";
+import Span from "@shared/Span";
 
-export class AccessedLiteral<T> extends Literal<string> {
+export default class AccessedLiteral<T> extends Literal<string> {
     public name: string
     public node: ParserNode
     public span: Span;

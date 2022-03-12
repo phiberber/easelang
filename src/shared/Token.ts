@@ -1,5 +1,5 @@
-import {Span} from "./Span";
-import Tag from "./Tag";
+import {Span} from "@shared/Span";
+import Tag from "@shared/Tag";
 
 export class Token<T, E = Tag> {
     public content: T

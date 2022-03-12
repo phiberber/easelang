@@ -1,11 +1,11 @@
-import Parser from "../Parser";
-import Tag, {Modifiers} from "../../../shared/Tag";
-import {DeclareFunction, DeclareParameter} from "../../../shared/nodes/declare/DeclareFunction";
-import Block from "../../../shared/nodes/Block";
-import {parseSimpleExpression} from "../expressions/ParseExpression";
-import {parseBlock} from "../misc/ParseBlock";
+import {parseSimpleExpression} from "@front/parser/expressions/ParseExpression";
+import {DeclareFunction, DeclareParameter} from "@nodes/declare/DeclareFunction";
+import parseBlock from "@front/parser/misc/ParseBlock";
+import Tag, {Modifiers} from "@shared/Tag";
+import Parser from "@front/parser/Parser";
+import Block from "@nodes/Block";
 
-export function parseFunctionDeclaration(this: Parser, modifiers: typeof Modifiers): DeclareFunction {
+export default function parseFunctionDeclaration(this: Parser, modifiers: typeof Modifiers): DeclareFunction {
 
     const parameters: DeclareParameter[] = []
     const startMatch = this.match(Tag.Function)

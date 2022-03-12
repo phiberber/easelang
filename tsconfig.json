@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES6",
+    "paths": {
+      "@shared/*": ["./src/shared/*"],
+      "@nodes/*": ["./src/shared/nodes/*"],
+      "@misc/*": ["./src/shared/misc/*"],
+      "@front/*": ["./src/front/*"],
+      "@back/*": ["./src/back/*"],
+      "@interpreter/*": ["./src/interpreter/*"]
+    }
+  }
+}

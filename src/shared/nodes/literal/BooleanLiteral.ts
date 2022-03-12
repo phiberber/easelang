@@ -1,8 +1,8 @@
-import {Literal} from "./Literal";
-import {Span} from "../../Span";
-import Tag from "../../Tag";
+import Literal from "@nodes/literal/Literal";
+import Span from "@shared/Span";
+import Tag from "@shared/Tag";
 
-export class BooleanLiteral extends Literal<boolean> {
+export default class BooleanLiteral extends Literal<boolean> {
     public tag: Tag = Tag.Boolean
     public name: boolean
     public span: Span

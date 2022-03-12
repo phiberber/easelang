@@ -1,8 +1,8 @@
-import {Declare} from "../../../shared/nodes/declare/Declare";
-import Tag from "../../../shared/Tag";
-import {Scope} from "../../memory/Scope";
+import Scope from "@interpreter/memory/Scope";
+import Declare from "@nodes/declare/Declare";
+import Tag from "@shared/Tag";
 
-export abstract class DeclaredRuntime<T extends Declare> {
+export default abstract class DeclaredRuntime<T extends Declare> {
 
     public declaration: T
 
@@ -26,6 +26,6 @@ export abstract class DeclaredRuntime<T extends Declare> {
     }
 
     public get name() { return this.declaration.identifier.content }
-    public get isExternal() { return this.hasModifier(Tag.External) }
+    public get isExternal(): boolean { return this.hasModifier(Tag.External) }
 
 }

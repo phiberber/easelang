@@ -1,8 +1,8 @@
-import {AbstractParseTree} from "../shared/nodes/AbstractParseTree";
-import Parser from "../front/parser/Parser";
-import Lexer from "../front/lexer/Lexer";
-import {Scope} from "./memory/Scope";
-import {computeNode} from "./runtime/NodeComputer";
+import AbstractParseTree from "@nodes/AbstractParseTree";
+import Lexer from "@front/lexer/Lexer";
+import Parser from "@front/parser/Parser";
+import Scope from "@interpreter/memory/Scope";
+import computeNode from "@interpreter/runtime/NodeComputer";
 
 class Interpreter {
 

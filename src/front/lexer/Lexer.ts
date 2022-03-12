@@ -1,11 +1,11 @@
-import Token from "../../shared/Token";
-import Tag, {Tags} from "../../shared/Tag";
-import isNumber from "../../shared/misc/IsNumber";
-import {Span} from "../../shared/Span";
-import {isUpperCase} from "../../shared/misc/isUpperCase";
-import {isLowerCase} from "../../shared/misc/isLowerCase";
-import ProcessResult from "../ProcessResult";
-import LexerContext, {LexerCode} from "./LexerContext";
+import LexerContext, {LexerCode} from "@front/lexer/LexerContext";
+import ProcessResult from "@front/ProcessResult";
+import Span from "@shared/Span";
+import Token from "@shared/Token";
+import Tag, {Tags} from "@shared/Tag";
+import isNumber from "@misc/IsNumber";
+import isUpperCase from "@misc/isUpperCase";
+import isLowerCase from "@misc/isLowerCase";
 
 class Lexer implements LexerContext {
 
@@ -35,7 +35,7 @@ class Lexer implements LexerContext {
 
             const token = this.findToken()
 
-            if (token === undefined || token === null) {
+            if (token == null) {
                 throw new Error(`Invalid token at point ${this.span.index} - line ${this.span.line}`)
             }
 

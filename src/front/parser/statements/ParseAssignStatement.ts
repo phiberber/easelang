@@ -1,9 +1,9 @@
-import Parser from "../Parser";
-import {AssignStatement} from "../../../shared/nodes/statement/AssignStatement";
-import Tag, {AssignmentTags} from "../../../shared/Tag";
-import {parseExpression} from "../expressions/ParseExpression";
+import parseExpression from "@front/parser/expressions/ParseExpression";
+import AssignStatement from "@nodes/statement/AssignStatement";
+import Tag, {AssignmentTags} from "@shared/Tag";
+import Parser from "@front/parser/Parser";
 
-export function parseAssignStatement(this: Parser): AssignStatement {
+export default function parseAssignStatement(this: Parser): AssignStatement {
     const startMatch = this.match(Tag.Identifier)
     const matchOperator = this.match(AssignmentTags)
     const value = parseExpression.call(this)

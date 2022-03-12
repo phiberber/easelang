@@ -1,9 +1,9 @@
-import {ParserNode} from "../ParserNode";
-import {Expression} from "./Expression";
-import {Span} from "../../Span";
-import Tag from "../../Tag";
+import Expression from "@nodes/expression/Expression";
+import ParserNode from "@nodes/ParserNode";
+import Span from "@shared/Span";
+import Tag from "@shared/Tag";
 
-export class BinaryExpression extends Expression {
+export default class BinaryExpression extends Expression {
     public nodeType: string = "BinaryExpression";
     public operator: Tag
     public left: ParserNode

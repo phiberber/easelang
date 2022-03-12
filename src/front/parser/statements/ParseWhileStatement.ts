@@ -1,11 +1,11 @@
-import Parser from "../Parser";
-import {WhileStatement} from "../../../shared/nodes/statement/WhileStatement";
-import {parseExpression} from "../expressions/ParseExpression";
-import {parseBlock} from "../misc/ParseBlock";
-import Tag from "../../../shared/Tag";
-import Block from "../../../shared/nodes/Block";
+import parseExpression from "@front/parser/expressions/ParseExpression";
+import WhileStatement from "@nodes/statement/WhileStatement";
+import parseBlock from "@front/parser/misc/ParseBlock";
+import Parser from "@front/parser/Parser";
+import Block from "@nodes/Block";
+import Tag from "@shared/Tag";
 
-export function parseWhileStatement(this: Parser): WhileStatement {
+export default function parseWhileStatement(this: Parser): WhileStatement {
     const startMatch = this.match(Tag.While)
 
     this.match(Tag.OpenParenthesis)

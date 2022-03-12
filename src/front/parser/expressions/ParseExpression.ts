@@ -1,29 +1,20 @@
-import Parser from "../Parser";
-import {ParserNode} from "../../../shared/nodes/ParserNode";
-import {BooleanExpression} from "../../../shared/nodes/expression/BooleanExpression";
-import {BinaryExpression} from "../../../shared/nodes/expression/BinaryExpression";
-import {StringLiteral} from "../../../shared/nodes/literal/StringLiteral";
-import {NumericLiteral} from "../../../shared/nodes/literal/NumericLiteral";
-import {BooleanLiteral} from "../../../shared/nodes/literal/BooleanLiteral";
-import {VariableLiteral} from "../../../shared/nodes/literal/VariableLiteral";
-import {parseFunctionCall} from "../statements/ParseFunctionCall";
-import {parseNewStatement} from "../declarations/NewStatement";
-import {AccessedLiteral} from "../../../shared/nodes/literal/AccessedLiteral";
-import Tag, {EqualityTags, PrimaryArithmeticalTags, RelationTags, SecondaryArithmeticalTags} from "../../../shared/Tag";
-
 /**
  * This is not separated in files because it would make it unreadable.
  */
+import Parser from "@front/parser/Parser";
+import ParserNode from "@nodes/ParserNode";
+import Tag, {EqualityTags, PrimaryArithmeticalTags, RelationTags, SecondaryArithmeticalTags} from "@shared/Tag";
+import parseFunctionCall from "@front/parser/statements/ParseFunctionCall";
+import parseNewStatement from "@front/parser/declarations/NewStatement";
+import BooleanExpression from "@nodes/expression/BooleanExpression";
+import BinaryExpression from "@nodes/expression/BinaryExpression";
+import StringLiteral from "@nodes/literal/StringLiteral";
+import NumericLiteral from "@nodes/literal/NumericLiteral";
+import BooleanLiteral from "@nodes/literal/BooleanLiteral";
+import VariableLiteral from "@nodes/literal/VariableLiteral";
+import AccessedLiteral from "@nodes/literal/AccessedLiteral";
 
-export function parseParenthesisExpression(this: Parser): ParserNode {
-    let node
-    this.match(Tag.OpenParenthesis)
-    node = parseExpression.call(this)
-    this.match(Tag.CloseParenthesis)
-    return node
-}
-
-export function parseExpression(this: Parser): ParserNode {
+export default function parseExpression(this: Parser): ParserNode {
     let node = parseOrOperand.call(this)
     while (this.accept(Tag.BooleanOr)) {
         const acceptedNode = this.match(Tag.BooleanOr)
@@ -31,6 +22,14 @@ export function parseExpression(this: Parser): ParserNode {
         const expressionSpan = acceptedNode.span.copy().expandEnd(rightExpression.span)
         node = new BooleanExpression(acceptedNode.tag, node, rightExpression, expressionSpan)
     }
+    return node
+}
+
+export function parseParenthesisExpression(this: Parser): ParserNode {
+    let node
+    this.match(Tag.OpenParenthesis)
+    node = parseExpression.call(this)
+    this.match(Tag.CloseParenthesis)
     return node
 }
 

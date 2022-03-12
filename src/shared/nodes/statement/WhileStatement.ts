@@ -1,8 +1,8 @@
-import {ParserNode} from "../ParserNode";
-import {Span} from "../../Span";
-import Block from "../Block";
+import ParserNode from "@nodes/ParserNode";
+import Block from "@nodes/Block";
+import Span from "@shared/Span";
 
-export class WhileStatement implements ParserNode {
+export default class WhileStatement implements ParserNode {
     public nodeType="WhileStatement"
     public condition: ParserNode
     public fallback: Block | undefined

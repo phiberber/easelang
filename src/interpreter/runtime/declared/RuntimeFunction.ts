@@ -1,18 +1,18 @@
-import {Scope, ScopeInternal} from "../../memory/Scope";
-import {DeclareFunction} from "../../../shared/nodes/declare/DeclareFunction";
-import {executeBlock} from "../StatementExecutor";
-import {resolveNested} from "../../../shared/misc/ResolveNested";
-import {computeNode} from "../NodeComputer";
-import {DeclaredRuntime} from "./DeclaredRuntime";
-import {RuntimeVariable} from "./RuntimeVariable";
+import DeclaredRuntime from "@interpreter/runtime/declared/DeclaredRuntime";
+import RuntimeVariable from "@interpreter/runtime/declared/RuntimeVariable";
+import {executeBlock} from "@interpreter/runtime/StatementExecutor";
+import {DeclareFunction} from "@nodes/declare/DeclareFunction";
+import Scope, {ScopeInternal} from "@interpreter/memory/Scope";
+import computeNode from "@interpreter/runtime/NodeComputer";
+import resolveNested from "@misc/resolveNested";
 
-type declareNode = DeclareFunction
+type DeclareNode = DeclareFunction
 
-export class RuntimeFunction extends DeclaredRuntime<declareNode> {
+export default class RuntimeFunction extends DeclaredRuntime<DeclareNode> {
 
-    public declaration: declareNode
+    public declaration: DeclareNode
 
-    public constructor(declaration: declareNode) {
+    public constructor(declaration: DeclareNode) {
         super()
         this.declaration = declaration
     }
@@ -22,7 +22,6 @@ export class RuntimeFunction extends DeclaredRuntime<declareNode> {
     }
 
     public execute(parameters: any[], scope: Scope) {
-
         const localScope = new Scope("local").implementParents(scope)
 
         if(this.isExternal) {
@@ -38,7 +37,6 @@ export class RuntimeFunction extends DeclaredRuntime<declareNode> {
         })
 
         return executeBlock(this.declaration.content, localScope)
-
     }
 
     public compute(path: string, scope: Scope) {

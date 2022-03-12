@@ -1,11 +1,11 @@
-import {ParserNode} from "../../shared/nodes/ParserNode";
-import Token from "../../shared/Token";
-import Tag from "../../shared/Tag";
-import {Span} from "../../shared/Span";
-import ParserContext from "./ParserContext";
-import ProcessResult from "../ProcessResult";
-import {AbstractParseTree} from "../../shared/nodes/AbstractParseTree";
-import { parseStatement } from "./statements/ParseStatements";
+import parseStatement from "@front/parser/statements/ParseStatements";
+import AbstractParseTree from "@nodes/AbstractParseTree";
+import ParserContext from "@front/parser/ParserContext";
+import ProcessResult from "@front/ProcessResult";
+import ParserNode from "@nodes/ParserNode";
+import Token from "@shared/Token";
+import Span from "@shared/Span";
+import Tag from "@shared/Tag";
 
 class Parser implements ParserContext {
     public look: Token<any>

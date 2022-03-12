@@ -1,8 +1,7 @@
-import {ParserNode} from "./ParserNode";
-import {Span} from "../Span";
+import ParserNode from "@nodes/ParserNode";
+import Span from "@shared/Span";
 
-class Block implements ParserNode {
-
+export default class Block implements ParserNode {
     nodeType: string = "Block"
     span: Span
     content: ParserNode[] = []
@@ -15,7 +14,4 @@ class Block implements ParserNode {
     public copy(): Block {
         return new Block(this.content, this.span.copy())
     }
-
 }
-
-export default Block

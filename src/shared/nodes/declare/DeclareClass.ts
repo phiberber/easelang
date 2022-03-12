@@ -1,10 +1,10 @@
-import {Span} from "../../Span";
-import {Declare} from "./Declare";
-import Block from "../Block";
-import Token from "../../Token";
-import {Modifiers} from "../../Tag";
+import Declare from "@nodes/declare/Declare";
+import {Modifiers} from "@shared/Tag";
+import Token from "@shared/Token";
+import Block from "@nodes/Block";
+import Span from "@shared/Span";
 
-export class DeclareClass extends Declare {
+export default class DeclareClass extends Declare {
     public type: Symbol | undefined;
     public modifiers: typeof Modifiers = []
     public identifier: Token<string>;

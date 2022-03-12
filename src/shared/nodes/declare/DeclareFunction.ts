@@ -1,11 +1,11 @@
-import {Span} from "../../Span";
-import {Declare} from "./Declare";
-import {Expression} from "../expression/Expression";
-import {Literal} from "../literal/Literal";
-import Block from "../Block";
-import Token from "../../Token";
-import Tag, {Modifiers} from "../../Tag";
-import {DeclareVariable} from "./DeclareVariable";
+import DeclareVariable from "@nodes/declare/DeclareVariable";
+import Expression from "@nodes/expression/Expression";
+import Literal from "@nodes/literal/Literal";
+import Declare from "@nodes/declare/Declare";
+import Tag, {Modifiers} from "@shared/Tag";
+import Token from "@shared/Token";
+import Block from "@nodes/Block";
+import Span from "@shared/Span";
 
 export type FunctionModifiers = typeof Modifiers
 

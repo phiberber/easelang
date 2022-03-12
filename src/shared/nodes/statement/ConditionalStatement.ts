@@ -1,8 +1,8 @@
-import {ParserNode} from "../ParserNode";
-import {Span} from "../../Span";
-import Block from "../Block";
+import ParserNode from "@nodes/ParserNode";
+import Block from "@nodes/Block";
+import Span from "@shared/Span";
 
-export class ConditionalStatement implements ParserNode {
+export default class ConditionalStatement implements ParserNode {
     public nodeType: string = "ConditionalStatement"
     public condition: ParserNode | undefined
     public fallbacks: ConditionalStatement[]

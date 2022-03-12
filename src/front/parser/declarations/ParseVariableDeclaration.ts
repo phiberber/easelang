@@ -1,9 +1,9 @@
-import {DeclareVariable} from "../../../shared/nodes/declare/DeclareVariable";
-import Tag, {Modifiers} from "../../../shared/Tag";
-import Parser from "../Parser";
-import {parseExpression} from "../expressions/ParseExpression";
+import parseExpression from "@front/parser/expressions/ParseExpression";
+import DeclareVariable from "@nodes/declare/DeclareVariable";
+import Tag, {Modifiers} from "@shared/Tag";
+import Parser from "@front/parser/Parser";
 
-export function parseVariableDeclaration(this: Parser, modifiers: typeof Modifiers): DeclareVariable {
+export default function parseVariableDeclaration(this: Parser, modifiers: typeof Modifiers): DeclareVariable {
 
     const variableType = this.match([Tag.Variable, Tag.Value, Tag.Constant])
     const variableName = this.match(Tag.Identifier)

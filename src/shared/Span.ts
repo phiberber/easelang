@@ -1,4 +1,4 @@
-export class Span {
+export default class Span {
     public index: number = 0
     public line: number = 0
     public end: number = 0

@@ -1,4 +1,4 @@
-import {Span} from "../../shared/Span";
+import Span from "@shared/Span";
 
 export type LexerCode = {
     rawCode: string,

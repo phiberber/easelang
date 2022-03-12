@@ -1,5 +1,5 @@
-import {ParserNode} from "../ParserNode";
-import {Span} from "../../Span";
+import ParserNode from "@nodes/ParserNode";
+import Span from "@shared/Span";
 
 export class ReturnStatement implements ParserNode {
     public nodeType: string = "ReturnStatement"

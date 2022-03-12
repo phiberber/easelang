@@ -1,15 +1,15 @@
-import {DeclareClass} from "../../../shared/nodes/declare/DeclareClass";
-import {executeBlock} from "../StatementExecutor";
-import {Scope, ScopeInternal} from "../../memory/Scope";
-import {DeclaredRuntime} from "./DeclaredRuntime";
+import DeclaredRuntime from "@interpreter/runtime/declared/DeclaredRuntime";
+import {executeBlock} from "@interpreter/runtime/StatementExecutor";
+import Scope, {ScopeInternal} from "@interpreter/memory/Scope";
+import DeclareClass from "@nodes/declare/DeclareClass";
 
-type declareNode = DeclareClass
+type DeclareNode = DeclareClass
 
-export class RuntimeClass extends DeclaredRuntime<declareNode> {
+export default class RuntimeClass extends DeclaredRuntime<DeclareNode> {
 
-    public declaration: declareNode
+    public declaration: DeclareNode
 
-    public constructor(declaration: declareNode) {
+    public constructor(declaration: DeclareNode) {
         super()
         this.declaration = declaration
     }

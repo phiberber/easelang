@@ -1,15 +1,15 @@
-import {DeclareVariable} from "../../../shared/nodes/declare/DeclareVariable";
-import {Scope, ScopeInternal} from "../../memory/Scope";
-import {DeclaredRuntime} from "./DeclaredRuntime";
-import {resolveNested} from "../../../shared/misc/ResolveNested";
+import Scope, {ScopeInternal} from "@interpreter/memory/Scope";
+import DeclaredRuntime from "@interpreter/runtime/declared/DeclaredRuntime";
+import DeclareVariable from "@nodes/declare/DeclareVariable";
+import resolveNested from "@misc/resolveNested";
 
-type declareNode = DeclareVariable
+type DeclareNode = DeclareVariable
 
-export class RuntimeVariable<T> extends DeclaredRuntime<declareNode> {
+export default class RuntimeVariable<T> extends DeclaredRuntime<DeclareNode> {
 
-    public declaration: declareNode
+    public declaration: DeclareNode
 
-    public constructor(declaration: declareNode) {
+    public constructor(declaration: DeclareNode) {
         super()
         this.declaration = declaration
     }

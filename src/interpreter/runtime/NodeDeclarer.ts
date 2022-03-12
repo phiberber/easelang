@@ -1,11 +1,11 @@
-import {RuntimeClass} from "./declared/RuntimeClass";
-import {RuntimeVariable} from "./declared/RuntimeVariable";
-import {RuntimeFunction} from "./declared/RuntimeFunction";
-import {DeclareClass} from "../../shared/nodes/declare/DeclareClass";
-import {Scope} from "../memory/Scope";
-import {computeNode} from "./NodeComputer";
-import {DeclareVariable} from "../../shared/nodes/declare/DeclareVariable";
-import {DeclareFunction} from "../../shared/nodes/declare/DeclareFunction";
+import Scope from "@interpreter/memory/Scope";
+import {DeclareFunction} from "@nodes/declare/DeclareFunction";
+import DeclareVariable from "@nodes/declare/DeclareVariable";
+import DeclareClass from "@nodes/declare/DeclareClass";
+import RuntimeClass from "@interpreter/runtime/declared/RuntimeClass";
+import RuntimeVariable from "@interpreter/runtime/declared/RuntimeVariable";
+import RuntimeFunction from "@interpreter/runtime/declared/RuntimeFunction";
+import computeNode from "@interpreter/runtime/NodeComputer";
 
 export function interpretClassDeclaration(declaration: DeclareClass, scope: Scope): RuntimeClass {
     const referenceName = RuntimeClass.internalReferenceName(declaration.identifier.content)

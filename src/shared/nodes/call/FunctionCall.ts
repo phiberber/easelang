@@ -1,8 +1,8 @@
-import {ParserNode} from "../ParserNode";
-import {Span} from "../../Span";
-import Token from "../../Token";
+import ParserNode from "@nodes/ParserNode";
+import Token from "@shared/Token";
+import Span from "@shared/Span";
 
-export class FunctionCall implements ParserNode {
+export default class FunctionCall implements ParserNode {
     public nodeType: string = "FunctionCall";
     public identifier: Token<string>
     public parameters: ParserNode[]

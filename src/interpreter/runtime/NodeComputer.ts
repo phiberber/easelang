@@ -1,23 +1,33 @@
-import {ParserNode} from "../../shared/nodes/ParserNode";
-import {Scope} from "../memory/Scope";
-import {FunctionCall} from "../../shared/nodes/call/FunctionCall";
-import {VariableLiteral} from "../../shared/nodes/literal/VariableLiteral";
-import {BooleanExpression} from "../../shared/nodes/expression/BooleanExpression";
-import {BinaryExpression} from "../../shared/nodes/expression/BinaryExpression";
-import {Literal} from "../../shared/nodes/literal/Literal";
-import {NewStatement} from "../../shared/nodes/statement/NewStatement";
-import Tag from "../../shared/Tag";
-import {DeclareClass} from "../../shared/nodes/declare/DeclareClass";
-import {DeclareVariable} from "../../shared/nodes/declare/DeclareVariable";
-import {DeclareFunction} from "../../shared/nodes/declare/DeclareFunction";
-import {ConditionalStatement} from "../../shared/nodes/statement/ConditionalStatement";
-import {WhileStatement} from "../../shared/nodes/statement/WhileStatement";
-import {RuntimeVariable} from "./declared/RuntimeVariable";
-import {executeAssign, executeFunctionCall, executeIf, executeNew, executeWhile} from "./StatementExecutor";
-import {interpretClassDeclaration, interpretFunctionDeclaration, interpretVariableDeclaration} from "./NodeDeclarer";
-import {AssignStatement} from "../../shared/nodes/statement/AssignStatement";
+import ParserNode from "@nodes/ParserNode";
+import Tag from "@shared/Tag";
+import {
+    interpretClassDeclaration,
+    interpretFunctionDeclaration,
+    interpretVariableDeclaration
+} from "@interpreter/runtime/NodeDeclarer";
+import Scope from "@interpreter/memory/Scope";
+import DeclareClass from "@nodes/declare/DeclareClass";
+import DeclareVariable from "@nodes/declare/DeclareVariable";
+import {DeclareFunction} from "@nodes/declare/DeclareFunction";
+import ConditionalStatement from "@nodes/statement/ConditionalStatement";
+import {
+    executeAssign,
+    executeFunctionCall,
+    executeIf,
+    executeNew,
+    executeWhile
+} from "@interpreter/runtime/StatementExecutor";
+import WhileStatement from "@nodes/statement/WhileStatement";
+import NewStatement from "@nodes/statement/NewStatement";
+import AssignStatement from "@nodes/statement/AssignStatement";
+import FunctionCall from "@nodes/call/FunctionCall";
+import BooleanExpression from "@nodes/expression/BooleanExpression";
+import BinaryExpression from "@nodes/expression/BinaryExpression";
+import VariableLiteral from "@nodes/literal/VariableLiteral";
+import Literal from "@nodes/literal/Literal";
+import RuntimeVariable from "@interpreter/runtime/declared/RuntimeVariable";
 
-export function computeNode(node: ParserNode | undefined, scope: Scope, depth = 1): any {
+export default function computeNode(node: ParserNode | undefined, scope: Scope, depth = 1): any {
 
     let current = 0
     let result = node

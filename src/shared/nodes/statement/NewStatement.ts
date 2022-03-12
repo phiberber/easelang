@@ -1,9 +1,9 @@
-import {ParserNode} from "../ParserNode";
-import {Span} from "../../Span";
-import Token from "../../Token";
-import {FunctionCall} from "../call/FunctionCall";
+import ParserNode from "@nodes/ParserNode";
+import FunctionCall from "@nodes/call/FunctionCall";
+import Span from "@shared/Span";
+import Token from "@shared/Token";
 
-export class NewStatement implements FunctionCall {
+export default class NewStatement implements FunctionCall {
     public nodeType: string = "NewStatement";
     public identifier: Token<string>
     public parameters: ParserNode[]

@@ -1,6 +1,6 @@
-import Token from "../../shared/Token";
-import {Span} from "../../shared/Span";
-import Tag from "../../shared/Tag";
+import Token from "@shared/Token";
+import Span from "@shared/Span";
+import Tag from "@shared/Tag";
 
 export default interface ParserContext {
     look: Token<any>

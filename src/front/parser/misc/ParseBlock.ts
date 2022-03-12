@@ -1,10 +1,10 @@
-import Parser from "../Parser";
-import Block from "../../../shared/nodes/Block";
-import Tag from "../../../shared/Tag";
-import {ParserNode} from "../../../shared/nodes/ParserNode";
-import {parseStatement} from "../statements/ParseStatements";
+import parseStatement from "@front/parser/statements/ParseStatements";
+import ParserNode from "@nodes/ParserNode";
+import Parser from "@front/parser/Parser";
+import Block from "@nodes/Block";
+import Tag from "@shared/Tag";
 
-export function parseBlock(this: Parser, restriction: "Declare" | "" = ""): Block {
+export default function parseBlock(this: Parser, restriction: "Declare" | "" = ""): Block {
     const startMatch = this.skip(Tag.Colon)
     const startSpan = startMatch ? startMatch.span : this.span
     const statements: ParserNode[] = []
