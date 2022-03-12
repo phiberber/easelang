@@ -1,7 +1,7 @@
-import Interpreter from "../src/interpreter/Interpreter";
-import Lexer from "../src/front/lexer/Lexer";
-import Parser from "../src/front/parser/Parser";
 import * as fs from "fs";
+import Lexer from "@front/lexer/Lexer";
+import Parser from "@front/parser/Parser";
+import Interpreter from "@interpreter/Interpreter";
 
 const logs = true
 const debug = false
