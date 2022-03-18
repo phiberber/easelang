@@ -8,12 +8,10 @@ export default function parseConditionalStatement(this: Parser): ConditionalStat
     const startMatch = this.match(Tag.If)
     const elseStatements = []
 
-    this.match(Tag.OpenParenthesis)
-
+    this.skip(Tag.OpenParenthesis)
     const condition = parseExpression.call(this)
 
-    this.match(Tag.CloseParenthesis)
-
+    this.skip(Tag.CloseParenthesis)
     const block = parseBlock.call(this)
 
     while (this.accept(Tag.Else)) {
