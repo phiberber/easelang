@@ -9,6 +9,7 @@ import parseAssignStatement from "@front/parser/statements/ParseAssignStatement"
 import parseConditionalStatement from "@front/parser/statements/ParseConditionalStatement";
 import parseWhileStatement from "@front/parser/statements/ParseWhileStatement";
 import parseExpression from "@front/parser/expressions/ParseExpression";
+import parseImport from "@front/parser/statements/ParseImport";
 
 export default function parseStatement(this: Parser): ParserNode {
 
@@ -53,6 +54,11 @@ export default function parseStatement(this: Parser): ParserNode {
     if (this.accept(Tag.If)) {
         // Execute an If Statement
         return parseConditionalStatement.call(this)
+    }
+
+    if (this.accept(Tag.Import)) {
+        // Import something from a module
+        return parseImport.call(this)
     }
 
     if (this.accept(Tag.While)) {
