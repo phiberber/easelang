@@ -5,7 +5,7 @@ import Parser from "@front/parser/Parser";
 import ParserNode from "@nodes/ParserNode";
 import Tag, {EqualityTags, PrimaryArithmeticalTags, RelationTags, SecondaryArithmeticalTags} from "@shared/Tag";
 import parseFunctionCall from "@front/parser/statements/ParseFunctionCall";
-import parseNewStatement from "@front/parser/declarations/NewStatement";
+import parseNewStatement from "@front/parser/statements/ParseNewStatement";
 import BooleanExpression from "@nodes/expression/BooleanExpression";
 import BinaryExpression from "@nodes/expression/BinaryExpression";
 import StringLiteral from "@nodes/literal/StringLiteral";
