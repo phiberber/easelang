@@ -5,8 +5,9 @@
  */
 
 class Tag {
-    content: string | string[] | Function
-    symbol: symbol
+    public content: string | string[] | Function
+    public symbol: symbol
+    public keyword: boolean
 
     static Space = this.create(" ", "Space")
     static Tab = this.create("\t", "Tab")
@@ -29,14 +30,17 @@ class Tag {
     static New = this.create("new", "New")
     static Return = this.create("return", "Return")
 
-    static If = this.create("if", "If")
-    static Else = this.create("else", "Else")
-    static In = this.create("in", "In")
-    static Is = this.create("is", "Is")
-    static Pass = this.create("pass", "Pass")
-    static While = this.create("while", "While")
-    static Break = this.create("break", "Break")
-    static Continue = this.create("continue", "Continue")
+    static If = this.create("if", "If", true)
+    static Else = this.create("else", "Else", true)
+    static As = this.create("as", "As", true)
+    static From = this.create("from", "From", true)
+    static In = this.create("in", "In", true)
+    static Is = this.create("is", "Is", true)
+    static Pass = this.create("pass", "Pass", true)
+    static Import = this.create("import", "Import", true)
+    static While = this.create("while", "While", true)
+    static Break = this.create("break", "Break", true)
+    static Continue = this.create("continue", "Continue", true)
 
     /**
      * Bitwise Operators:
@@ -66,13 +70,13 @@ class Tag {
 
     static LineBreak = this.create(["\n", "\r\n"], "Line Break")
 
-    static Class = this.create("class", "Class")
-    static Function = this.create("fun", "Function")
-    static Value = this.create("val", "Value")
-    static Constant = this.create("var", "Constant")
-    static Variable = this.create("const", "Variable")
+    static Class = this.create("class", "Class", true)
+    static Function = this.create("fun", "Function", true)
+    static Value = this.create("val", "Value", true)
+    static Constant = this.create("var", "Constant", true)
+    static Variable = this.create("const", "Variable", true)
 
-    static External = this.create("external", "External")
+    static External = this.create("external", "External", true)
 
     static Addition = this.create("+", "Addition")
     static Subtraction = this.create("-", "Subtraction")
@@ -111,19 +115,18 @@ class Tag {
     static Integer = this.create(undefined, "Integer")
     static Float = this.create(undefined, "Float")
 
-    constructor(content: string | string[], description: string) {
+    constructor(content: string | string[], description: string, keyword: boolean = false) {
         this.content = content
         this.symbol = Symbol.for(description)
+        this.keyword = keyword
     }
 
-    static create(content: string | string[], description: string): Tag {
-        return new Tag(content, description)
+    static create(content: string | string[], description: string, keyword: boolean = false): Tag {
+        return new Tag(content, description, keyword)
     }
 }
 
-export const Tags = Object.values(Tag)
-
-export const KeywordTags = [Tag.If, Tag.Else, Tag.In, Tag.Is, Tag.Break, Tag.Continue, Tag.Pass]
+export const Tags: Tag[] = Object.values(Tag)
 
 export const GreatnessTags = [Tag.Greater, Tag.GreaterOrEqual, Tag.Less, Tag.LessOrEqual]
 export const EqualityTags = [Tag.Equals, Tag.NotEquals]
