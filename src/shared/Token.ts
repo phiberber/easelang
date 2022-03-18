@@ -1,4 +1,4 @@
-import {Span} from "@shared/Span";
+import Span from "@shared/Span";
 import Tag from "@shared/Tag";
 
 export class Token<T, E = Tag> {
