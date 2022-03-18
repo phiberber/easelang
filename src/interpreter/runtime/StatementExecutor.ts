@@ -39,7 +39,7 @@ export function executeFunctionCall(call: FunctionCall, scope: Scope): Boolean {
         has: hasFunctionStored
     } = scope.reference<RuntimeFunction>(referenceName)
     if (!hasFunctionStored())
-        throw new Error(`The function with the name of "${call.identifier.content} was not present in the context scope."`)
+        throw new Error(`The function with the name of "${call.identifier.content}" was not present in the context scope.`)
     const runtimeFunction = retrieveFunction()
     const computedParameters = call.parameters.map(parameter => computeNode(parameter, scope, Infinity))
     return runtimeFunction.execute(computedParameters, scope)
