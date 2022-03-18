@@ -103,8 +103,17 @@ class Lexer implements LexerContext {
 
             if (typeof tag.content === 'string') {
                 if (this.accept(tag.content)) {
-                    token = this.createToken(tag.content, tag)
-                    return true
+                    // This is just a temporary work-around
+                    if (tag.keyword) {
+                        const nextChar = this.code.lowerCaseCode[this.span.index + tag.content.length]
+                        if([' ', '\t', '\n', '\r', ':', ';'].includes(nextChar)) {
+                            token = this.createToken(tag.content, tag)
+                            return true
+                        }
+                    } else {
+                        token = this.createToken(tag.content, tag)
+                        return true
+                    }
                 }
                 return false
             }
