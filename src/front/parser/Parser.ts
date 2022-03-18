@@ -24,6 +24,9 @@ class Parser implements ParserContext {
 
         while (this.left() > 0) {
             const statement = parseStatement.call(this)
+            if(!statement && this.left() > 0) {
+                this.raise("Unable to parse statement/expression " + this.look.tag.content)
+            }
             nodes.push(statement)
         }
 
