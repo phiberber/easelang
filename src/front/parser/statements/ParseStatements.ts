@@ -6,7 +6,7 @@ import parseVariableDeclaration from "@front/parser/declarations/ParseVariableDe
 import parseFunctionDeclaration from "@front/parser/declarations/ParseFunctionDeclaration";
 import parseFunctionCall from "@front/parser/statements/ParseFunctionCall";
 import parseAssignStatement from "@front/parser/statements/ParseAssignStatement";
-import parseIfStatement from "@front/parser/statements/ParseIfStatement";
+import parseConditionalStatement from "@front/parser/statements/ParseConditionalStatement";
 import parseWhileStatement from "@front/parser/statements/ParseWhileStatement";
 import parseExpression from "@front/parser/expressions/ParseExpression";
 
@@ -52,7 +52,7 @@ export default function parseStatement(this: Parser): ParserNode {
 
     if (this.accept(Tag.If)) {
         // Execute an If Statement
-        return parseIfStatement.call(this)
+        return parseConditionalStatement.call(this)
     }
 
     if (this.accept(Tag.While)) {

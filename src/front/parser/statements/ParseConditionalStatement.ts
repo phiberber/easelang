@@ -4,7 +4,7 @@ import parseBlock from "@front/parser/misc/ParseBlock";
 import Parser from "@front/parser/Parser";
 import Tag from "@shared/Tag";
 
-export default function parseIfStatement(this: Parser): ConditionalStatement {
+export default function parseConditionalStatement(this: Parser): ConditionalStatement {
     const startMatch = this.match(Tag.If)
     const elseStatements = []
 
