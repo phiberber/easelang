@@ -1,15 +1,15 @@
-import DeclareStatement from "@nodes/declare/DeclareStatement";
-import Block from "@nodes/Block";
-import Span from "@shared/Span";
-import IdentifierExpression from "@nodes/expression/IdentifierExpression";
+import {DeclareStatement} from "@nodes/declare/DeclareStatement";
+import {BlockExpression} from "@nodes/expression/BlockExpression";
+import {Span} from "@shared/Span";
+import {IdentifierExpression} from "@nodes/expression/IdentifierExpression";
 
-export default class ClassStatement extends DeclareStatement {
+export class ClassStatement extends DeclareStatement {
     public nodeType = "ClassStatement"
     public identifier: IdentifierExpression
-    public content: Block
+    public content: BlockExpression
     public span: Span;
 
-    constructor(identifier: IdentifierExpression, content: Block, span: Span) {
+    constructor(identifier: IdentifierExpression, content: BlockExpression, span: Span) {
         super();
         this.identifier = identifier
         this.content = content

@@ -1,19 +1,19 @@
-import AssignExpression from "@nodes/expression/AssignExpression";
-import BinaryExpression from "@nodes/expression/BinaryExpression";
-import BooleanExpression from "@nodes/expression/BooleanExpression";
-import CallExpression from "@nodes/expression/CallExpression";
-import ESObject from "@interpreter/memory/objects/ESObject";
-import Expression from "@nodes/expression/Expression";
-import IdentifierExpression from "@nodes/expression/IdentifierExpression";
-import LiteralExpression from "@nodes/literal/LiteralExpression";
-import MemberExpression from "@nodes/expression/MemberExpression";
-import Scope from "@interpreter/memory/Scope";
-import Tag, {PostUnaryTags, PreUnaryTags} from "@shared/Tag";
-import Block from "@nodes/Block";
+import {AssignExpression} from "@nodes/expression/AssignExpression";
+import {BinaryExpression} from "@nodes/expression/BinaryExpression";
+import {BlockExpression} from "@nodes/expression/BlockExpression";
+import {BooleanExpression} from "@nodes/expression/BooleanExpression";
+import {CallExpression} from "@nodes/expression/CallExpression";
+import {ESFunction} from "@interpreter/memory/objects/ESFunction";
+import {ESObject} from "@interpreter/memory/objects/ESObject";
 import {executeStatement} from "@interpreter/runtime/Executor";
+import {Expression} from "@nodes/expression/Expression";
 import {FunctionExpression} from "@nodes/declare/FunctionExpression";
-import ESFunction from "@interpreter/memory/objects/ESFunction";
-import UnaryExpression from "@nodes/expression/UnaryExpression";
+import {IdentifierExpression} from "@nodes/expression/IdentifierExpression";
+import {LiteralExpression} from "@nodes/literal/LiteralExpression";
+import {MemberExpression} from "@nodes/expression/MemberExpression";
+import {Scope} from "@interpreter/memory/Scope";
+import {Tag} from "@shared/Tag";
+import {UnaryExpression} from "@nodes/expression/UnaryExpression";
 
 export function computeExpression<T extends Expression>(expression: T | undefined, scope: Scope): ESObject {
     if (!expression) return ESObject.null
@@ -26,7 +26,7 @@ export function computeExpression<T extends Expression>(expression: T | undefine
     else if (expression instanceof IdentifierExpression) return computeIdentifierExpression(expression, scope)
     else if (expression instanceof FunctionExpression) return computeFunctionDeclaration(expression, scope)
     else if (expression instanceof CallExpression) return computeCallExpression(expression, scope)
-    else if (expression instanceof Block) return computeBlock(expression, scope)
+    else if (expression instanceof BlockExpression) return computeBlock(expression, scope)
     else throw new Error(`Unsupported expression type: ${expression.constructor.name}`)
 }
 
@@ -134,7 +134,7 @@ export function computeFunctionDeclaration(declaration: FunctionExpression, scop
     return anonymous ? esFunction : reference.set(esFunction)
 }
 
-export function computeBlock(block: Block, scope: Scope): ESObject {
+export function computeBlock(block: BlockExpression, scope: Scope): ESObject {
     const lastIndex = (block.content.length - 1).toString()
     for (const index in block.content) {
         const node = block.content[index]
@@ -145,10 +145,3 @@ export function computeBlock(block: Block, scope: Scope): ESObject {
     }
     return ESObject.null
 }
-
-// const referenceName = RuntimeFunction.internalReferenceName(call.callee.value)
-// const {get: retrieveFunction} = scope.reference<RuntimeFunction>(referenceName)
-// const runtimeFunction = retrieveFunction()
-// if (!runtimeFunction) throw new Error(`The function with the name of "${call.callee}" was not present in the context scope.`)
-// const computedParameters = call.parameters.map(parameter => computeNode(parameter, scope, Infinity))
-// return runtimeFunction.execute(computedParameters, scope)

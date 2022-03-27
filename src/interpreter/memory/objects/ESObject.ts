@@ -1,4 +1,4 @@
-export default class ESObject<T = any> {
+export class ESObject<T = any> {
     [x: string]: any;
 
     value: T | this | undefined

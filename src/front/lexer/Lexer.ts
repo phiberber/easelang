@@ -1,13 +1,13 @@
-import LexerContext, {LexerCode} from "@front/lexer/LexerContext";
-import ProcessResult from "@front/ProcessResult";
-import Span from "@shared/Span";
-import Token from "@shared/Token";
-import Tag, {Tags} from "@shared/Tag";
-import isNumber from "@misc/IsNumber";
-import isUpperCase from "@misc/isUpperCase";
-import isLowerCase from "@misc/isLowerCase";
+import {isLowerCase} from "@misc/isLowerCase";
+import {isNumber} from "@misc/IsNumber";
+import {isUpperCase} from "@misc/isUpperCase";
+import {LexerContext, LexerCode} from "@front/lexer/LexerContext";
+import {ProcessResult} from "@front/ProcessResult";
+import {Span} from "@shared/Span";
+import {Tag, Tags} from "@shared/Tag";
+import {Token} from "@shared/Token";
 
-class Lexer implements LexerContext {
+export class Lexer implements LexerContext {
 
     public code: LexerCode
     public span: Span
@@ -20,14 +20,15 @@ class Lexer implements LexerContext {
         }
     }
 
-    public perform(): ProcessResult<Token<any>[]> {
+    public perform(): ProcessResult<Token[]> {
+        
         if (this.code.rawCode.length <= 0) {
-            return { time: 0, result: [] }
+            return {time: 0, result: []}
         }
 
         const startTime = new Date().getTime()
         const {rawCode} = this.code
-        const tokens: Token<any>[] = []
+        const tokens: Token[] = []
         const maximumIndex: number = rawCode.length - 1
         let lineIndentation = 0
 
@@ -62,8 +63,8 @@ class Lexer implements LexerContext {
             }
 
             /** Add x to the indentation **/
-            if(token.tag === Tag.Space || token.tag === Tag.Tab) {
-                if(this.span.indentation === 0) {
+            if (token.tag === Tag.Space || token.tag === Tag.Tab) {
+                if (this.span.indentation === 0) {
                     lineIndentation += token.tag === Tag.Space ? 1 : 4
                 }
                 continue
@@ -96,8 +97,8 @@ class Lexer implements LexerContext {
         return this.code.lowerCaseCode.indexOf(content, this.span.index) - this.span.index === 0
     }
 
-    public findToken(): Token<any> | undefined {
-        let token: Token<any> | undefined
+    public findToken(): Token | undefined {
+        let token: Token | undefined
 
         Tags.some((tag) => {
 
@@ -106,7 +107,7 @@ class Lexer implements LexerContext {
                     // This is just a temporary work-around
                     if (tag.keyword) {
                         const nextChar = this.code.lowerCaseCode[this.span.index + tag.content.length]
-                        if([' ', '\t', '\n', '\r', ':', ';'].includes(nextChar)) {
+                        if ([' ', '\t', '\n', '\r', ':', ';'].includes(nextChar)) {
                             token = this.createToken(tag.content, tag)
                             return true
                         }
@@ -120,19 +121,19 @@ class Lexer implements LexerContext {
 
             if (tag === Tag.Identifier) {
                 const result = Lexer.matchIdentifier(this)
-                if(result) token = result
+                if (result) token = result
                 return !!result
             }
 
             if (tag === Tag.String) {
                 const result = Lexer.matchString(this)
-                if(result) token = result
+                if (result) token = result
                 return !!result
             }
 
             if (tag === Tag.Integer || tag === Tag.Float) {
                 const result = Lexer.matchNumber(this)
-                if(result) token = result
+                if (result) token = result
                 return !!result
             }
 
@@ -183,7 +184,7 @@ class Lexer implements LexerContext {
                 if (char === '$') return true
                 if (char === '_') return true
                 const charCode = char.codePointAt(0)
-                if(charCode == null) return false
+                if (charCode == null) return false
                 return isNumber(charCode) || isUpperCase(charCode) || isLowerCase(charCode)
             })
         }
@@ -228,5 +229,3 @@ class Lexer implements LexerContext {
     }
 
 }
-
-export default Lexer

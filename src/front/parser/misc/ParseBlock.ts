@@ -1,10 +1,10 @@
-import parseStatement from "@front/parser/statements/ParseStatement";
-import ParserNode from "@nodes/ParserNode";
-import Parser from "@front/parser/Parser";
-import Block from "@nodes/Block";
-import Tag from "@shared/Tag";
+import {parseStatement} from "@front/parser/statements/ParseStatement";
+import {ParserNode} from "@nodes/ParserNode";
+import {Parser} from "@front/parser/Parser";
+import {BlockExpression} from "@nodes/expression/BlockExpression";
+import {Tag} from "@shared/Tag";
 
-export default function parseBlock(this: Parser, restriction: "Declare" | "" = ""): Block {
+export function parseBlock(this: Parser, restriction: "Declare" | "" = ""): BlockExpression {
     const startMatch = this.skip(Tag.Colon)
     const startSpan = startMatch ? startMatch.span : this.span
     const statements: ParserNode[] = []
@@ -23,5 +23,5 @@ export default function parseBlock(this: Parser, restriction: "Declare" | "" = "
     }
 
     const blockSpan = startSpan.copy().expandEnd(this.span)
-    return new Block(statements, blockSpan)
+    return new BlockExpression(statements, blockSpan)
 }

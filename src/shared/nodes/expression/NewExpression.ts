@@ -1,9 +1,9 @@
-import ParserNode from "@nodes/ParserNode";
-import CallExpression from "@nodes/expression/CallExpression";
-import Span from "@shared/Span";
-import IdentifierExpression from "@nodes/expression/IdentifierExpression";
+import {ParserNode} from "@nodes/ParserNode";
+import {CallExpression} from "@nodes/expression/CallExpression";
+import {Span} from "@shared/Span";
+import {IdentifierExpression} from "@nodes/expression/IdentifierExpression";
 
-export default class NewExpression implements CallExpression {
+export class NewExpression implements CallExpression {
     public nodeType: string = "NewStatement";
     public callee: IdentifierExpression
     public args: ParserNode[]

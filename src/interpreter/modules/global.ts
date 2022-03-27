@@ -1,4 +1,4 @@
-import Module from "@interpreter/modules/Module";
+import {Module} from "@interpreter/modules/Module";
 
 export const GlobalModule = () =>
     Module.fromNative('global', {

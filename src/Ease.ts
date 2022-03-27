@@ -1,7 +1,7 @@
-import Lexer from "@front/lexer/Lexer";
-import Parser from "@front/parser/Parser";
-import Interpreter from "@interpreter/Interpreter";
-import ESObject from "@interpreter/memory/objects/ESObject";
+import {Lexer} from "@front/lexer/Lexer";
+import {Parser} from "@front/parser/Parser";
+import {Interpreter} from "@interpreter/Interpreter";
+import {ESObject} from "@interpreter/memory/objects/ESObject";
 
 const logs = true
 const debug = false

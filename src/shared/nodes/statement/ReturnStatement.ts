@@ -1,6 +1,6 @@
-import Span from "@shared/Span";
-import Expression from "@nodes/expression/Expression";
-import Statement from "@nodes/statement/Statement";
+import {Span} from "@shared/Span";
+import {Expression} from "@nodes/expression/Expression";
+import {Statement} from "@nodes/statement/Statement";
 
 export class ReturnStatement extends Statement {
     public nodeType: string = "ReturnStatement"

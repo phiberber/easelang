@@ -1,6 +1,6 @@
-import Span from "@shared/Span";
+import {Span} from "@shared/Span";
 
-export default interface ParserNode {
+export interface ParserNode {
     nodeType: string,
     span: Span,
 }

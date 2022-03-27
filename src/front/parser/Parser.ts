@@ -1,18 +1,18 @@
-import parseStatement from "@front/parser/statements/ParseStatement";
-import AbstractParseTree from "@nodes/AbstractParseTree";
-import ParserContext from "@front/parser/ParserContext";
-import ProcessResult from "@front/ProcessResult";
-import ParserNode from "@nodes/ParserNode";
-import Token from "@shared/Token";
-import Span from "@shared/Span";
-import Tag from "@shared/Tag";
+import {AbstractParseTree} from "@nodes/AbstractParseTree";
+import {ParserContext} from "@front/parser/ParserContext";
+import {ParserNode} from "@nodes/ParserNode";
+import {parseStatement} from "@front/parser/statements/ParseStatement";
+import {ProcessResult} from "@front/ProcessResult";
+import {Span} from "@shared/Span";
+import {Tag} from "@shared/Tag";
+import {Token} from "@shared/Token";
 
-class Parser implements ParserContext {
-    public look: Token<any>
-    public content: Token<any>[]
+export class Parser implements ParserContext {
+    public look: Token
+    public content: Token[]
     public span: Span
 
-    public constructor(tokens: Token<any>[]) {
+    public constructor(tokens: Token[]) {
         this.content = tokens
         this.look = this.content[0]
         this.span = new Span(0, 0, this.content.length - 1, 0)
@@ -25,7 +25,7 @@ class Parser implements ParserContext {
         while (this.look) {
             const statement = parseStatement.call(this)
             if(!statement && this.look) this.raise("Unable to parse statement " + this.look.tag.content)
-            nodes.push(statement)
+            if(statement) nodes.push(statement)
         }
 
         return {
@@ -56,11 +56,11 @@ class Parser implements ParserContext {
         return tag === Tag.Space;
     }
 
-    skip(tag: Tag | Tag[]): Token<any> | undefined {
+    skip(tag: Tag | Tag[]): Token | undefined {
         return this.accept(tag) ? this.match(tag) : undefined
     }
 
-    match(tag: Tag | Tag[]): Token<any, Tag> {
+    match(tag: Tag | Tag[]): Token {
         if (!this.accept(tag)) {
             this.raise(`Expected ${Array.isArray(tag) ? "any of " + tag.map(tag => tag.symbol.description).join(",") : "a(an) " + tag.symbol.description }, received a ${this.look.tag.symbol.description}`)
             return this.look
@@ -70,7 +70,7 @@ class Parser implements ParserContext {
         return look
     }
 
-    next(amount: number = 1): Token<any> {
+    next(amount: number = 1): Token {
         this.span.index += amount
         this.look = this.content[this.span.index]
         if (this.look) {
@@ -84,5 +84,3 @@ class Parser implements ParserContext {
         throw new SyntaxError(`${error}, occurred at line:column ${this.span.line}:${this.span.index}`)
     }
 }
-
-export default Parser

@@ -1,8 +1,8 @@
-import LiteralExpression from "@nodes/literal/LiteralExpression";
-import Span from "@shared/Span";
-import Tag from "@shared/Tag";
+import {LiteralExpression} from "@nodes/literal/LiteralExpression";
+import {Span} from "@shared/Span";
+import {Tag} from "@shared/Tag";
 
-export default class NumericLiteral extends LiteralExpression<number> {
+export class NumericLiteral extends LiteralExpression<number> {
     public nodeType = "NumericLiteral"
     public tag: Tag
     public value: number

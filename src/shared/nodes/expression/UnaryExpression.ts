@@ -1,8 +1,8 @@
-import Expression from "@nodes/expression/Expression";
-import Span from "@shared/Span";
-import Tag from "@shared/Tag";
+import {Expression} from "@nodes/expression/Expression";
+import {Span} from "@shared/Span";
+import {Tag} from "@shared/Tag";
 
-export default class UnaryExpression extends Expression {
+export class UnaryExpression extends Expression {
     public nodeType: string = "UnaryExpression";
     public argument: Expression
     public operator: Tag

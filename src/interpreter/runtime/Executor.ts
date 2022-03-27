@@ -1,12 +1,12 @@
-import ClassStatement from "@nodes/declare/ClassStatement";
-import ConditionalStatement from "@nodes/statement/ConditionalStatement";
-import ImportStatement from "@nodes/statement/ImportStatement";
-import Scope from "@interpreter/memory/Scope";
-import Statement from "@nodes/statement/Statement";
-import VariableStatement from "@nodes/declare/VariableStatement";
-import WhileStatement from "@nodes/statement/WhileStatement";
+import {ClassStatement} from "@nodes/declare/ClassStatement";
 import {computeBlock, computeExpression} from "@interpreter/runtime/Computer";
-import Module from "@interpreter/modules/Module";
+import {ConditionalStatement} from "@nodes/statement/ConditionalStatement";
+import {ImportStatement} from "@nodes/statement/ImportStatement";
+import {Module} from "@interpreter/modules/Module";
+import {Scope} from "@interpreter/memory/Scope";
+import {Statement} from "@nodes/statement/Statement";
+import {VariableStatement} from "@nodes/declare/VariableStatement";
+import {WhileStatement} from "@nodes/statement/WhileStatement";
 
 export function executeStatement<T extends Statement>(statement: T, scope: Scope): void {
     if (statement instanceof ConditionalStatement) return executeConditional(statement, scope);

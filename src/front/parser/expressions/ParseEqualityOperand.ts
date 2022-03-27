@@ -1,11 +1,11 @@
-import BinaryExpression from "@nodes/expression/BinaryExpression";
-import parseExpression from "@front/parser/expressions/ParseExpression";
-import Parser from "@front/parser/Parser";
-import parseSimpleExpression from "@front/parser/expressions/ParseSimpleExpression";
+import {BinaryExpression} from "@nodes/expression/BinaryExpression";
 import {EqualityOperand} from "@shared/Type";
 import {EqualityTags} from "@shared/Tag";
+import {parseExpression} from "@front/parser/expressions/ParseExpression";
+import {Parser} from "@front/parser/Parser";
+import {parseSimpleExpression} from "@front/parser/expressions/ParseSimpleExpression";
 
-export default function parseEqualityOperand(this: Parser): EqualityOperand {
+export function parseEqualityOperand(this: Parser): EqualityOperand {
     let node = parseSimpleExpression.call(this)
     while (this.accept(EqualityTags)) {
         const acceptedNode = this.match(EqualityTags)

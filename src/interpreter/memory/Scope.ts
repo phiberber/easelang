@@ -1,6 +1,5 @@
-import ESObject from "@interpreter/memory/objects/ESObject";
-import Module from "@interpreter/modules/Module";
-import {GlobalModule} from "@interpreter/modules/global";
+import {ESObject} from "@interpreter/memory/objects/ESObject";
+import {Module} from "@interpreter/modules/Module";
 
 export type ScopeType = "global" | "intermediate" | "local"
 
@@ -10,7 +9,7 @@ export interface ScopeReference {
     has(): Boolean
 }
 
-export default class Scope {
+export class Scope {
 
     public type: ScopeType
     public parents: Scope[]
@@ -84,4 +83,4 @@ export default class Scope {
     }
 }
 
-export const globalScope = new Scope("global").importModule(GlobalModule());
+export const globalScope = new Scope("global").importModule(Module.global);

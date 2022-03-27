@@ -1,17 +1,15 @@
-import parseAssignExpression from "@front/parser/expressions/ParseAssignExpression";
-import parseClassDeclaration from "@front/parser/declarations/ParseClassDeclaration";
-import parseConditionalStatement from "@front/parser/statements/ParseConditionalStatement";
-import parseExpression from "@front/parser/expressions/ParseExpression";
-import parseCallExpression from "@front/parser/expressions/ParseCallExpression";
-import parseFunctionDeclaration from "@front/parser/declarations/ParseFunctionDeclaration";
-import parseImport from "@front/parser/statements/ParseImport";
-import Parser from "@front/parser/Parser";
-import ParserNode from "@nodes/ParserNode";
-import parseVariableDeclaration from "@front/parser/declarations/ParseVariableDeclaration";
-import parseWhileStatement from "@front/parser/statements/ParseWhileStatement";
-import Tag from "@shared/Tag";
+import {parseClassDeclaration} from "@front/parser/declarations/ParseClassDeclaration";
+import {parseConditionalStatement} from "@front/parser/statements/ParseConditionalStatement";
+import {parseExpression} from "@front/parser/expressions/ParseExpression";
+import {parseFunctionDeclaration} from "@front/parser/declarations/ParseFunctionDeclaration";
+import {parseImport} from "@front/parser/statements/ParseImport";
+import {ParserNode} from "@nodes/ParserNode";
+import {Parser} from "@front/parser/Parser";
+import {parseVariableDeclaration} from "@front/parser/declarations/ParseVariableDeclaration";
+import {parseWhileStatement} from "@front/parser/statements/ParseWhileStatement";
+import {Tag} from "@shared/Tag";
 
-export default function parseStatement(this: Parser): ParserNode {
+export function parseStatement(this: Parser): ParserNode | undefined {
 
     this.skip(Tag.LineBreak)
 

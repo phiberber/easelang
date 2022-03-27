@@ -1,7 +1,6 @@
-import Parser from "@front/parser/Parser";
-import {Modifiers} from "@shared/Tag";
-import NewExpression from "@nodes/expression/NewExpression";
+import {Parser} from "@front/parser/Parser";
+import {NewExpression} from "@nodes/expression/NewExpression";
 
-export default function parseNewStatement(this: Parser, modifiers: typeof Modifiers): NewExpression {
+export function parseNewStatement(this: Parser): NewExpression {
     throw new Error("Not implemented")
 }

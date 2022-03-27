@@ -1,11 +1,11 @@
-import CallExpression, {CalleeCandidate} from "@nodes/expression/CallExpression";
-import parseExpression from "@front/parser/expressions/ParseExpression";
-import parseIdentifier from "@front/parser/expressions/ParseIdentifier";
-import Parser from "@front/parser/Parser";
-import ParserNode from "@nodes/ParserNode";
-import Tag from "@shared/Tag";
+import {CallExpression, CalleeCandidate} from "@nodes/expression/CallExpression";
+import {parseExpression} from "@front/parser/expressions/ParseExpression";
+import {parseIdentifier} from "@front/parser/expressions/ParseIdentifier";
+import {ParserNode} from "@nodes/ParserNode";
+import {Parser} from "@front/parser/Parser";
+import {Tag} from "@shared/Tag";
 
-export default function parseCallExpression(this: Parser, callee: CalleeCandidate = parseIdentifier.call(this)): CallExpression {
+export function parseCallExpression(this: Parser, callee: CalleeCandidate = parseIdentifier.call(this)): CallExpression {
     const parameters: ParserNode[] = []
     this.match(Tag.OpenParenthesis)
     while (!this.accept(Tag.CloseParenthesis)) {

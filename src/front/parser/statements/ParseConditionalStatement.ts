@@ -1,10 +1,10 @@
-import ConditionalStatement from "@nodes/statement/ConditionalStatement";
-import parseExpression from "@front/parser/expressions/ParseExpression";
-import parseBlock from "@front/parser/misc/ParseBlock";
-import Parser from "@front/parser/Parser";
-import Tag from "@shared/Tag";
+import {ConditionalStatement} from "@nodes/statement/ConditionalStatement";
+import {parseBlock} from "@front/parser/misc/ParseBlock";
+import {parseExpression} from "@front/parser/expressions/ParseExpression";
+import {Parser} from "@front/parser/Parser";
+import {Tag} from "@shared/Tag";
 
-export default function parseConditionalStatement(this: Parser): ConditionalStatement {
+export function parseConditionalStatement(this: Parser): ConditionalStatement {
     const startMatch = this.match(Tag.If)
     const elseStatements = []
 

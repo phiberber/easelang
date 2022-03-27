@@ -1,15 +1,15 @@
-import BooleanLiteral from "@nodes/literal/BooleanLiteral";
-import MemberExpression from "@nodes/expression/MemberExpression";
-import NumericLiteral from "@nodes/literal/NumericLiteral";
-import parseCallExpression from "@front/parser/expressions/ParseCallExpression";
-import parseIdentifier from "@front/parser/expressions/ParseIdentifier";
-import parseParenthesisExpression from "@front/parser/expressions/ParseParenthesisExpression";
-import Parser from "@front/parser/Parser";
-import StringLiteral from "@nodes/literal/StringLiteral";
-import Tag from "@shared/Tag";
+import {BooleanLiteral} from "@nodes/literal/BooleanLiteral";
 import {Factor} from "@shared/Type";
+import {MemberExpression} from "@nodes/expression/MemberExpression";
+import {NumericLiteral} from "@nodes/literal/NumericLiteral";
+import {parseCallExpression} from "@front/parser/expressions/ParseCallExpression";
+import {parseIdentifier} from "@front/parser/expressions/ParseIdentifier";
+import {parseParenthesisExpression} from "@front/parser/expressions/ParseParenthesisExpression";
+import {Parser} from "@front/parser/Parser";
+import {StringLiteral} from "@nodes/literal/StringLiteral";
+import {Tag} from "@shared/Tag";
 
-export default function parseFactor(this: Parser): Factor | undefined {
+export function parseFactor(this: Parser): Factor | undefined {
     let node: Factor | undefined
     let identifier
 

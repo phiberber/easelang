@@ -1,7 +1,7 @@
-import ParserNode from "@nodes/ParserNode";
-import Span from "@shared/Span";
+import {Span} from "@shared/Span";
+import {Expression} from "@nodes/expression/Expression";
 
-export default class IdentifierExpression implements ParserNode {
+export class IdentifierExpression extends Expression {
 
     public nodeType: string = "IdentifierExpression";
     public span: Span;
@@ -10,6 +10,7 @@ export default class IdentifierExpression implements ParserNode {
     public static empty = new IdentifierExpression("")
 
     public constructor(value: string, span: Span = Span.empty) {
+        super();
         this.value = value;
         this.span = span;
     }

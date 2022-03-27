@@ -1,12 +1,12 @@
-import AbstractParseTree from "@nodes/AbstractParseTree";
-import Lexer from "@front/lexer/Lexer";
-import Parser from "@front/parser/Parser";
-import Scope from "@interpreter/memory/Scope";
-import Statement from "@nodes/statement/Statement";
+import {AbstractParseTree} from "@nodes/AbstractParseTree";
+import {Lexer} from "@front/lexer/Lexer";
+import {Parser} from "@front/parser/Parser";
+import {Scope} from "@interpreter/memory/Scope";
+import {Statement} from "@nodes/statement/Statement";
 import {computeExpression} from "@interpreter/runtime/Computer";
 import {executeStatement} from "@interpreter/runtime/Executor";
 
-class Interpreter {
+export class Interpreter {
 
     public syntaxTree: AbstractParseTree | undefined
     public result: any[] = []
@@ -42,5 +42,3 @@ class Interpreter {
     }
 
 }
-
-export default Interpreter

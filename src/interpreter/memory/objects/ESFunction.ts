@@ -1,6 +1,6 @@
-import ESObject from "@interpreter/memory/objects/ESObject";
+import { ESObject } from "./ESObject";
 
-export default class ESFunction extends ESObject {
+export class ESFunction extends ESObject {
 
     readonly name: string
 

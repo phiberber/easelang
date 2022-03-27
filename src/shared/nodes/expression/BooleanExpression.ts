@@ -1,9 +1,9 @@
-import Expression from "@nodes/expression/Expression";
-import ParserNode from "@nodes/ParserNode";
-import Span from "@shared/Span";
-import Tag from "@shared/Tag";
+import {Expression} from "@nodes/expression/Expression";
+import {ParserNode} from "@nodes/ParserNode";
+import {Span} from "@shared/Span";
+import {Tag} from "@shared/Tag";
 
-export default class BooleanExpression extends Expression {
+export class BooleanExpression extends Expression {
     public nodeType: string = "BooleanExpression";
     public operator: Tag
     public left: ParserNode | undefined

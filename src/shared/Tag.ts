@@ -4,7 +4,7 @@
  * @example: Tag.String, Tag.Number, Tag.Identifier
  */
 
-class Tag {
+export class Tag {
     public content: string | string[] | undefined
     public symbol: symbol
     public keyword: boolean
@@ -144,5 +144,3 @@ export const ComparisonTags = GreatnessTags.concat(EqualityTags)
 export const Modifiers: Tag[] = [Tag.External]
 
 export const NumberTags = [Tag.Integer, Tag.Float]
-
-export default Tag

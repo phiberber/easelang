@@ -1,9 +1,9 @@
-import Parser from "@front/parser/Parser";
-import Tag from "@shared/Tag";
-import Token from "@shared/Token";
-import ImportStatement from "@nodes/statement/ImportStatement";
+import {ImportStatement} from "@nodes/statement/ImportStatement";
+import {Parser} from "@front/parser/Parser";
+import {Tag} from "@shared/Tag";
+import {Token} from "@shared/Token";
 
-export default function parseImport(this: Parser): ImportStatement {
+export function parseImport(this: Parser): ImportStatement {
 
     const start = this.match(Tag.Import)
 

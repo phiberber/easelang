@@ -1,10 +1,10 @@
-import ParserNode from "@nodes/ParserNode";
-import Span from "@shared/Span";
-import Tag from "@shared/Tag";
-import IdentifierExpression from "@nodes/expression/IdentifierExpression";
-import Expression from "@nodes/expression/Expression";
+import {ParserNode} from "@nodes/ParserNode";
+import {Span} from "@shared/Span";
+import {Tag} from "@shared/Tag";
+import {IdentifierExpression} from "@nodes/expression/IdentifierExpression";
+import {Expression} from "@nodes/expression/Expression";
 
-export default class MemberExpression extends Expression {
+export class MemberExpression extends Expression {
     public nodeType: string = "MemberExpression";
     public left: ParserNode
     public right: IdentifierExpression

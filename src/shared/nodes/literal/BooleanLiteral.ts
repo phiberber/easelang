@@ -1,8 +1,8 @@
-import LiteralExpression from "@nodes/literal/LiteralExpression";
-import Span from "@shared/Span";
-import Tag from "@shared/Tag";
+import {LiteralExpression} from "@nodes/literal/LiteralExpression";
+import {Span} from "@shared/Span";
+import {Tag} from "@shared/Tag";
 
-export default class BooleanLiteral extends LiteralExpression<boolean> {
+export class BooleanLiteral extends LiteralExpression<boolean> {
     public nodeType = "BooleanLiteral"
     public tag: Tag = Tag.Boolean
     public value: boolean

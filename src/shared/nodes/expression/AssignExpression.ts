@@ -1,9 +1,9 @@
-import Span from "@shared/Span";
-import Token from "@shared/Token";
-import Expression from "@nodes/expression/Expression";
-import IdentifierExpression from "@nodes/expression/IdentifierExpression";
+import {Span} from "@shared/Span";
+import {Token} from "@shared/Token";
+import {Expression} from "@nodes/expression/Expression";
+import {IdentifierExpression} from "@nodes/expression/IdentifierExpression";
 
-export default class AssignExpression extends Expression {
+export class AssignExpression extends Expression {
     public nodeType: string = "AssignExpression"
     public assigned: IdentifierExpression
     public operator: Token<string>

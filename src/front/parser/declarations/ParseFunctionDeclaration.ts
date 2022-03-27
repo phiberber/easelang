@@ -1,18 +1,18 @@
-import Block from "@nodes/Block";
-import parseBlock from "@front/parser/misc/ParseBlock";
-import parseIdentifier from "@front/parser/expressions/ParseIdentifier";
-import Parser from "@front/parser/Parser";
-import parseSimpleExpression from "@front/parser/expressions/ParseSimpleExpression";
-import Tag from "@shared/Tag";
+import {BlockExpression} from "@nodes/expression/BlockExpression";
 import {FunctionExpression, ParameterStatement} from "@nodes/declare/FunctionExpression";
-import IdentifierExpression from "@nodes/expression/IdentifierExpression";
+import {IdentifierExpression} from "@nodes/expression/IdentifierExpression";
+import {parseBlock} from "@front/parser/misc/ParseBlock";
+import {parseIdentifier} from "@front/parser/expressions/ParseIdentifier";
+import {Parser} from "@front/parser/Parser";
+import {parseSimpleExpression} from "@front/parser/expressions/ParseSimpleExpression";
+import {Tag} from "@shared/Tag";
 
-export default function parseFunctionDeclaration(this: Parser): FunctionExpression {
+export function parseFunctionDeclaration(this: Parser): FunctionExpression {
 
     const parameters: ParameterStatement[] = []
     const startMatch = this.accept(Tag.Function) ? this.match(Tag.Function) : this.look
     const identifier = this.accept(Tag.Identifier) ? parseIdentifier.call(this) : IdentifierExpression.empty
-    let block: Block = Block.empty
+    let block: BlockExpression = BlockExpression.empty
     let dynamic = false
 
     this.match(Tag.OpenParenthesis)

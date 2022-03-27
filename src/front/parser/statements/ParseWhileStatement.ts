@@ -1,20 +1,20 @@
-import parseExpression from "@front/parser/expressions/ParseExpression";
-import WhileStatement from "@nodes/statement/WhileStatement";
-import parseBlock from "@front/parser/misc/ParseBlock";
-import Parser from "@front/parser/Parser";
-import Block from "@nodes/Block";
-import Tag from "@shared/Tag";
+import {BlockExpression} from "@nodes/expression/BlockExpression";
+import {parseBlock} from "@front/parser/misc/ParseBlock";
+import {parseExpression} from "@front/parser/expressions/ParseExpression";
+import {Parser} from "@front/parser/Parser";
+import {Tag} from "@shared/Tag";
+import {WhileStatement} from "@nodes/statement/WhileStatement";
 
-export default function parseWhileStatement(this: Parser): WhileStatement {
+export function parseWhileStatement(this: Parser): WhileStatement {
     const startMatch = this.match(Tag.While)
 
     this.match(Tag.OpenParenthesis)
-    const condition = parseExpression.call(this)
+    const condition = parseExpression.call(this) ?? this.raise("Expected condition in while statement")
 
     this.match(Tag.CloseParenthesis)
     const block = parseBlock.call(this)
 
-    let fallbackBlock: Block | undefined = undefined
+    let fallbackBlock: BlockExpression | undefined = undefined
 
     if (this.accept(Tag.Else)) {
         this.match(Tag.Else)

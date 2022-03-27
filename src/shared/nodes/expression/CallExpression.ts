@@ -1,13 +1,11 @@
-import ParserNode from "@nodes/ParserNode";
-import Token from "@shared/Token";
-import Span from "@shared/Span";
-import IdentifierExpression from "@nodes/expression/IdentifierExpression";
-import Expression from "@nodes/expression/Expression";
-import LiteralExpression from "@nodes/literal/LiteralExpression";
+import {ParserNode} from "@nodes/ParserNode";
+import {Span} from "@shared/Span";
+import {IdentifierExpression} from "@nodes/expression/IdentifierExpression";
+import {Expression} from "@nodes/expression/Expression";
 
 export type CalleeCandidate = IdentifierExpression | Expression
 
-export default class CallExpression extends Expression {
+export class CallExpression extends Expression {
     public nodeType: string = "CallExpression";
     public callee: CalleeCandidate
     public args: ParserNode[]

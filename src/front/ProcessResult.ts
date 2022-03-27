@@ -1,4 +1,4 @@
-export default interface ProcessResult<T> {
+export interface ProcessResult<T> {
     time: number,
     result: T
 }

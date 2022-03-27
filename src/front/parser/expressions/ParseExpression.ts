@@ -1,15 +1,12 @@
-/**
- * This is not separated in files because it would make it unreadable.
- */
-import Expression from "@nodes/expression/Expression";
-import parseAssignExpression from "@front/parser/expressions/ParseAssignExpression";
-import parseBooleanExpression from "@front/parser/expressions/ParseBooleanExpression";
-import Parser from "@front/parser/Parser";
-import Tag, {PostUnaryTags, PreUnaryTags} from "@shared/Tag";
-import parseFunctionDeclaration from "@front/parser/declarations/ParseFunctionDeclaration";
-import UnaryExpression from "@nodes/expression/UnaryExpression";
+import {Expression} from "@nodes/expression/Expression";
+import {parseAssignExpression} from "@front/parser/expressions/ParseAssignExpression";
+import {parseBooleanExpression} from "@front/parser/expressions/ParseBooleanExpression";
+import {parseFunctionDeclaration} from "@front/parser/declarations/ParseFunctionDeclaration";
+import {Parser} from "@front/parser/Parser";
+import {Tag, PostUnaryTags, PreUnaryTags} from "@shared/Tag";
+import {UnaryExpression} from "@nodes/expression/UnaryExpression";
 
-export default function parseExpression(this: Parser): Expression | undefined {
+export function parseExpression(this: Parser): Expression | undefined {
 
     let expression: Expression | undefined;
     let prefixes = []

@@ -1,11 +1,11 @@
-import BinaryExpression from "@nodes/expression/BinaryExpression";
-import parseEqualityOperand from "@front/parser/expressions/ParseEqualityOperand";
-import parseExpression from "@front/parser/expressions/ParseExpression";
-import Parser from "@front/parser/Parser";
 import {AndOperand} from "@shared/Type";
+import {BinaryExpression} from "@nodes/expression/BinaryExpression";
 import {ComparisonTags} from "@shared/Tag";
+import {parseEqualityOperand} from "@front/parser/expressions/ParseEqualityOperand";
+import {parseExpression} from "@front/parser/expressions/ParseExpression";
+import {Parser} from "@front/parser/Parser";
 
-export default function parseComparisonOperand(this: Parser): AndOperand {
+export function parseComparisonOperand(this: Parser): AndOperand {
     let node = parseEqualityOperand.call(this)
     while (this.accept(ComparisonTags)) {
         const acceptedNode = this.match(ComparisonTags)

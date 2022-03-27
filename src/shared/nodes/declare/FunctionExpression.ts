@@ -1,10 +1,9 @@
-import VariableStatement from "@nodes/declare/VariableStatement";
-import Expression from "@nodes/expression/Expression";
-import DeclareStatement from "@nodes/declare/DeclareStatement";
-import Tag, {Modifiers} from "@shared/Tag";
-import Block from "@nodes/Block";
-import Span from "@shared/Span";
-import IdentifierExpression from "@nodes/expression/IdentifierExpression";
+import {BlockExpression} from "@nodes/expression/BlockExpression";
+import {Expression} from "@nodes/expression/Expression";
+import {IdentifierExpression} from "@nodes/expression/IdentifierExpression";
+import {Span} from "@shared/Span";
+import {Tag, Modifiers} from "@shared/Tag";
+import {VariableStatement} from "@nodes/declare/VariableStatement";
 
 export type FunctionModifiers = typeof Modifiers
 
@@ -14,7 +13,7 @@ export class ParameterStatement extends VariableStatement {
     public initializer: Expression
     public optional: Boolean
 
-    constructor(identifier: IdentifierExpression, initializer: Expression = Expression.empty, optional: Boolean = false, span: Span = Span.empty) {[]
+    constructor(identifier: IdentifierExpression, initializer: Expression = Expression.empty, optional: Boolean = false, span: Span = Span.empty) {
         super(Tag.Constant, identifier, initializer, span);
         this.identifier = identifier
         this.initializer = initializer
@@ -31,10 +30,10 @@ export class FunctionExpression extends Expression {
     public nodeType = "FunctionExpression"
     public identifier: IdentifierExpression
     public parameters: ParameterStatement[]
-    public content: Block
+    public content: BlockExpression
     public span: Span;
 
-    constructor(identifier: IdentifierExpression, parameters: ParameterStatement[] = [], content: Block = Block.empty, span: Span = Span.empty) {
+    constructor(identifier: IdentifierExpression, parameters: ParameterStatement[] = [], content: BlockExpression = BlockExpression.empty, span: Span = Span.empty) {
         super();
         this.identifier = identifier
         this.parameters = parameters

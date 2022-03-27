@@ -1,11 +1,11 @@
-import Span from "@shared/Span";
+import type {Span} from "@shared/Span";
 
 export type LexerCode = {
     rawCode: string,
     lowerCaseCode: string
 }
 
-export default interface LexerContext {
+export interface LexerContext {
     code: LexerCode
     span: Span
 }

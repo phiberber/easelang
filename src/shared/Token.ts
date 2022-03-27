@@ -1,5 +1,5 @@
-import Span from "@shared/Span";
-import Tag from "@shared/Tag";
+import {Span} from "@shared/Span";
+import {Tag} from "@shared/Tag";
 
 export class Token<T = any, E = Tag> {
     public content: T
@@ -18,5 +18,3 @@ export class Token<T = any, E = Tag> {
         return new Token<T, E>(this.content, this.source, this.span.copy(), this.tag)
     }
 }
-
-export default Token

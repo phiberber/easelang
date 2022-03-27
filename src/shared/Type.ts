@@ -1,7 +1,7 @@
-import Expression from "@nodes/expression/Expression";
-import BooleanExpression from "@nodes/expression/BooleanExpression";
-import BinaryExpression from "@nodes/expression/BinaryExpression";
-import UnaryExpression from "@nodes/expression/UnaryExpression";
+import type {Expression} from "@nodes/expression/Expression";
+import type {BooleanExpression} from "@nodes/expression/BooleanExpression";
+import type {BinaryExpression} from "@nodes/expression/BinaryExpression";
+import type {UnaryExpression} from "@nodes/expression/UnaryExpression";
 
 export type Factor = Expression | undefined
 export type NotOperand = Factor | BooleanExpression

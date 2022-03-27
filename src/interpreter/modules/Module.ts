@@ -1,7 +1,8 @@
-import ESFunction from "@interpreter/memory/objects/ESFunction";
-import ESObject from "@interpreter/memory/objects/ESObject";
+import {ESFunction} from "@interpreter/memory/objects/ESFunction";
+import {ESObject} from "@interpreter/memory/objects/ESObject";
 import {JavaScriptModule} from "@interpreter/modules/js";
 import {HttpModule} from "@interpreter/modules/http";
+import {GlobalModule} from "@interpreter/modules/global";
 
 export function translateToES(key: string, value: any): ESObject {
     if(value == null) return ESObject.null
@@ -16,11 +17,15 @@ export function translateToES(key: string, value: any): ESObject {
     } else return new ESObject(value)
 }
 
-export default class Module {
+export class Module {
 
     public static list: Map<string, Module> = new Map()
     public name: string
     public exported: { [key: string]: ESObject }
+
+    static js: Module;
+    static global: Module;
+    static http: Module;
 
     public constructor(name: string, exportedNodes: { [key: string]: ESObject }) {
         this.name = name
@@ -28,6 +33,8 @@ export default class Module {
     }
 
     public static register(module: Module): Module {
+        // @ts-ignore
+        Module[module.name] = module
         Module.list.set(module.name, module)
         return module
     }
@@ -41,5 +48,6 @@ export default class Module {
 
 }
 
-Module.list.set("js", JavaScriptModule())
-Module.list.set("http", HttpModule())
+Module.register(JavaScriptModule())
+Module.register(HttpModule())
+Module.register(GlobalModule())
