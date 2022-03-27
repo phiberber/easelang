@@ -1,4 +1,4 @@
-import parseStatement from "@front/parser/statements/ParseStatements";
+import parseStatement from "@front/parser/statements/ParseStatement";
 import AbstractParseTree from "@nodes/AbstractParseTree";
 import ParserContext from "@front/parser/ParserContext";
 import ProcessResult from "@front/ProcessResult";
@@ -22,11 +22,9 @@ class Parser implements ParserContext {
         const startTime = new Date().getTime()
         const nodes: ParserNode[] = []
 
-        while (this.left() > 0) {
+        while (this.look) {
             const statement = parseStatement.call(this)
-            if(!statement && this.left() > 0) {
-                this.raise("Unable to parse statement/expression " + this.look.tag.content)
-            }
+            if(!statement && this.look) this.raise("Unable to parse statement " + this.look.tag.content)
             nodes.push(statement)
         }
 
@@ -40,12 +38,8 @@ class Parser implements ParserContext {
         }
     }
 
-    left(): number {
-        return this.span.end - this.span.index
-    }
-
     accept(tag: Tag | Tag[]): boolean {
-        if (this.left() < 0) return false
+        if (!this.look) return false
         if (this.ignorable(tag)) return false
         if (Array.isArray(tag)) return tag.includes(this.look.tag)
         return this.look.tag === tag
@@ -86,7 +80,7 @@ class Parser implements ParserContext {
         return this.look
     }
 
-    raise(error: string): unknown {
+    raise(error: string): never {
         throw new SyntaxError(`${error}, occurred at line:column ${this.span.line}:${this.span.index}`)
     }
 }

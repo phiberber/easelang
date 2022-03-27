@@ -1,3 +1,0 @@
-external fun console.log(content)
-
-console.log("Hello World")

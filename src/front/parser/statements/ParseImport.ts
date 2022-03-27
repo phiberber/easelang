@@ -3,7 +3,7 @@ import Tag from "@shared/Tag";
 import Token from "@shared/Token";
 import ImportStatement from "@nodes/statement/ImportStatement";
 
-export default function parseImport(this: Parser) {
+export default function parseImport(this: Parser): ImportStatement {
 
     const start = this.match(Tag.Import)
 
@@ -13,15 +13,17 @@ export default function parseImport(this: Parser) {
      */
 
     const imported: Token<string>[] = []
+    let module
 
-    while(!this.accept(Tag.From)) {
+    while(this.accept(Tag.Identifier)) {
         imported.push(this.match(Tag.Identifier))
         this.skip(Tag.Comma)
     }
 
-    this.match(Tag.From)
-
-    const module = this.match([Tag.Identifier, Tag.String])
+    if(this.accept(Tag.From)) {
+        this.match(Tag.From)
+        module = this.match([Tag.Identifier, Tag.String])
+    } else module = imported[imported.length - 1]
 
     const importSpan = start.span.copy().expandEnd(module.span)
     return new ImportStatement(imported, module, importSpan)

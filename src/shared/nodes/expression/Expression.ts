@@ -4,8 +4,6 @@ import Tag from "@shared/Tag";
 
 export default abstract class Expression implements ParserNode {
     public nodeType: string = "Expression"
-    public abstract operator: Tag
-    public abstract left: ParserNode
-    public abstract right: ParserNode
     public abstract span: Span;
+    public static empty: Expression = { nodeType: "Expression", span: Span.empty }
 }

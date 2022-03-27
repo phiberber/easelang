@@ -1,17 +1,18 @@
-import Literal from "@nodes/literal/Literal";
+import LiteralExpression from "@nodes/literal/LiteralExpression";
 import Span from "@shared/Span";
 import Tag from "@shared/Tag";
 
-export default class NumericLiteral extends Literal<number> {
+export default class NumericLiteral extends LiteralExpression<number> {
+    public nodeType = "NumericLiteral"
     public tag: Tag
-    public name: number
+    public value: number
     public span: Span
 
     constructor(tag: Tag, value: number, span: Span) {
         super();
         this.span = span
         this.tag = tag
-        this.name = value
+        this.value = value
         this.span = span
     }
 }

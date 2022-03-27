@@ -6,13 +6,15 @@
   "author": "phiberber <phiberberian@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "esr test/index.ts"
+    "test": "esr test/http.ts"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/node": "^16.11.6"
   },
   "dependencies": {
     "esbuild": "^0.14.25",
-    "esbuild-runner": "^2.2.1"
+    "esbuild-runner": "^2.2.1",
+    "express": "^4.17.3"
   }
 }

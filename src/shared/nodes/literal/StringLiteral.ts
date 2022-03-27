@@ -1,17 +1,18 @@
-import Literal from "@nodes/literal/Literal";
+import LiteralExpression from "@nodes/literal/LiteralExpression";
 import Span from "@shared/Span";
 import Tag from "@shared/Tag";
 
-export default class StringLiteral extends Literal<string> {
+export default class StringLiteral extends LiteralExpression<string> {
+    public nodeType = "StringLiteral"
     public tag: Tag
-    public name: string
+    public value: string
     public span: Span
 
     constructor(tag: Tag, value: string, span: Span) {
         super();
         this.span = span
         this.tag = tag
-        this.name = value
+        this.value = value
         this.span = span
     }
 }

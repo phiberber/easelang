@@ -1,16 +1,20 @@
-import ParserNode from "@nodes/ParserNode";
 import Block from "@nodes/Block";
 import Span from "@shared/Span";
+import Statement from "@nodes/statement/Statement";
+import Expression from "@nodes/expression/Expression";
 
-export default class ConditionalStatement implements ParserNode {
+// @TODO: Switch from fallbacks to a LinkedList of ConditionalStatements, being the last one the "else" statement block.
+
+export default class ConditionalStatement extends Statement {
     public nodeType: string = "ConditionalStatement"
-    public condition: ParserNode | undefined
+    public test: Expression | undefined
     public fallbacks: ConditionalStatement[]
     public block: Block
     public span: Span
 
-    constructor(condition: ParserNode | undefined = undefined, fallbacks: ConditionalStatement[] = [], block: Block, span: Span) {
-        this.condition = condition
+    constructor(condition: Expression | undefined = undefined, fallbacks: ConditionalStatement[] = [], block: Block, span: Span) {
+        super();
+        this.test = condition
         this.fallbacks = fallbacks
         this.block = block
         this.span = span

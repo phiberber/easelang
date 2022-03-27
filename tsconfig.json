@@ -10,6 +10,7 @@
       "@front/*": ["./src/front/*"],
       "@back/*": ["./src/back/*"],
       "@interpreter/*": ["./src/interpreter/*"]
-    }
+    },
+    "allowSyntheticDefaultImports": true
   }
 }

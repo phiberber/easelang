@@ -2,7 +2,9 @@ import AbstractParseTree from "@nodes/AbstractParseTree";
 import Lexer from "@front/lexer/Lexer";
 import Parser from "@front/parser/Parser";
 import Scope from "@interpreter/memory/Scope";
-import computeNode from "@interpreter/runtime/NodeComputer";
+import Statement from "@nodes/statement/Statement";
+import {computeExpression} from "@interpreter/runtime/Computer";
+import {executeStatement} from "@interpreter/runtime/Executor";
 
 class Interpreter {
 
@@ -24,20 +26,19 @@ class Interpreter {
     }
 
     public perform(): { time: number, result: any[] } {
-
         const startTime = new Date().getTime()
-        const globalScope = new Scope("global")
-
+        const scope = new Scope("intermediate")
         if (!this.syntaxTree) return {time: 0, result: []}
-
-        for (const node of this.syntaxTree.body)
-            computeNode(node, globalScope)
-
+        for (const node of this.syntaxTree.body) {
+            if (node instanceof Statement) {
+                executeStatement(node, scope)
+                this.result[node.span.line - 1] = `[${node.nodeType}]`
+            } else this.result[node.span.line - 1] = computeExpression(node, scope)
+        }
         return {
             time: new Date().getTime() - startTime,
             result: this.result
         }
-
     }
 
 }

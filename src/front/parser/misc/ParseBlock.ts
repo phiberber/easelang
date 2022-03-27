@@ -1,4 +1,4 @@
-import parseStatement from "@front/parser/statements/ParseStatements";
+import parseStatement from "@front/parser/statements/ParseStatement";
 import ParserNode from "@nodes/ParserNode";
 import Parser from "@front/parser/Parser";
 import Block from "@nodes/Block";
@@ -16,7 +16,7 @@ export default function parseBlock(this: Parser, restriction: "Declare" | "" = "
             const innerStatement = parseStatement.call(this)
             if(!innerStatement) break
             if(restriction && innerStatement.nodeType !== restriction) {
-                this.raise(`You can only use ${restriction} Statements in this scope`)
+                this.raise(`You can only use ${restriction} statements in this scope`)
             }
             statements.push(innerStatement)
         }

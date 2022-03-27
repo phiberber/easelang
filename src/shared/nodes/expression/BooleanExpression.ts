@@ -4,12 +4,13 @@ import Span from "@shared/Span";
 import Tag from "@shared/Tag";
 
 export default class BooleanExpression extends Expression {
+    public nodeType: string = "BooleanExpression";
     public operator: Tag
-    public left: ParserNode
-    public right: ParserNode
+    public left: ParserNode | undefined
+    public right: ParserNode | undefined
     public span: Span
 
-    constructor(operator: Tag, left: ParserNode, right: ParserNode, span: Span) {
+    constructor(operator: Tag, left: ParserNode | undefined, right: ParserNode | undefined, span: Span) {
         super()
         this.span = span
         this.operator = operator

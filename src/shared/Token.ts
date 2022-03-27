@@ -1,7 +1,7 @@
 import Span from "@shared/Span";
 import Tag from "@shared/Tag";
 
-export class Token<T, E = Tag> {
+export class Token<T = any, E = Tag> {
     public content: T
     public source: string
     public span: Span

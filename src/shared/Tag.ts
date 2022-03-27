@@ -5,7 +5,7 @@
  */
 
 class Tag {
-    public content: string | string[] | Function
+    public content: string | string[] | undefined
     public symbol: symbol
     public keyword: boolean
 
@@ -21,7 +21,7 @@ class Tag {
     static OpenBrackets = this.create("[", "Open Brackets")
     static CloseBrackets = this.create("]", "Close Brackets")
 
-    static SafeDot = this.create("?.", "Safe Dot")
+    static ChainDot = this.create("?.", "Safe Dot")
     static Dot = this.create(".", "Dot")
     static Comma = this.create(",", "Comma")
     static Colon = this.create(":", "Colon")
@@ -73,19 +73,19 @@ class Tag {
     static Class = this.create("class", "Class", true)
     static Function = this.create("fun", "Function", true)
     static Value = this.create("val", "Value", true)
-    static Constant = this.create("var", "Constant", true)
-    static Variable = this.create("const", "Variable", true)
+    static Variable = this.create("let", "Variable", true)
+    static Constant = this.create("const", "Constant", true)
 
     static External = this.create("external", "External", true)
+
+    static Increment = this.create("++", "Increment")
+    static Decrement = this.create("--", "Decrement")
 
     static Addition = this.create("+", "Addition")
     static Subtraction = this.create("-", "Subtraction")
     static Multiplication = this.create("*", "Multiplication")
     static Division = this.create("/", "Division")
     static Remainer = this.create("%", "Remainer")
-
-    static Increment = this.create("++", "Increment")
-    static Decrement = this.create("--", "Decrement")
 
     static BooleanOr = this.create("||", "Boolean Or")
     static BooleanNot = this.create("!", "Boolean Not")
@@ -115,13 +115,13 @@ class Tag {
     static Integer = this.create(undefined, "Integer")
     static Float = this.create(undefined, "Float")
 
-    constructor(content: string | string[], description: string, keyword: boolean = false) {
+    constructor(content: string | string[] | undefined, description: string, keyword: boolean = false) {
         this.content = content
         this.symbol = Symbol.for(description)
         this.keyword = keyword
     }
 
-    static create(content: string | string[], description: string, keyword: boolean = false): Tag {
+    static create(content: string | string[] | undefined, description: string, keyword: boolean = false): Tag {
         return new Tag(content, description, keyword)
     }
 }
@@ -136,9 +136,10 @@ export const SecondaryArithmeticalTags = [Tag.Multiplication, Tag.Division, Tag.
 
 export const ArithmeticalTags = [Tag.Addition, Tag.Subtraction, Tag.Multiplication, Tag.Division, Tag.Remainer]
 
-export const UnaryTags = [Tag.Increment, Tag.Decrement]
+export const PostUnaryTags = [Tag.Increment, Tag.Decrement]
+export const PreUnaryTags = [Tag.BooleanNot, Tag.Addition, Tag.Subtraction, ...PostUnaryTags]
 export const AssignmentTags = [Tag.Assign, Tag.AssignPlus, Tag.AssignMinus, Tag.AssignMultiplied, Tag.AssignDivided, Tag.AssignRemained]
-export const RelationTags = GreatnessTags.concat(EqualityTags)
+export const ComparisonTags = GreatnessTags.concat(EqualityTags)
 
 export const Modifiers: Tag[] = [Tag.External]
 

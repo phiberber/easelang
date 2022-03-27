@@ -96,8 +96,8 @@ class Lexer implements LexerContext {
         return this.code.lowerCaseCode.indexOf(content, this.span.index) - this.span.index === 0
     }
 
-    public findToken(): Token<any> {
-        let token: Token<any>
+    public findToken(): Token<any> | undefined {
+        let token: Token<any> | undefined
 
         Tags.some((tag) => {
 
@@ -183,7 +183,8 @@ class Lexer implements LexerContext {
                 if (char === '$') return true
                 if (char === '_') return true
                 const charCode = char.codePointAt(0)
-                return isNumber(charCode) || isUpperCase(charCode) || isLowerCase(charCode) || char === '.'
+                if(charCode == null) return false
+                return isNumber(charCode) || isUpperCase(charCode) || isLowerCase(charCode)
             })
         }
 

@@ -1,30 +1,37 @@
+import ESObject from "@interpreter/memory/objects/ESObject";
+import Module from "@interpreter/modules/Module";
+import {GlobalModule} from "@interpreter/modules/global";
+
 export type ScopeType = "global" | "intermediate" | "local"
 
-export interface ScopeReference<T> {
-    get(): T | undefined
-    set(value: T)
+export interface ScopeReference {
+    get(): ESObject | undefined
+    set<T extends ESObject>(value: T): T
     has(): Boolean
 }
 
 export default class Scope {
 
-    public type: ScopeType = "local"
-
-    public parents: Scope[] = []
-    public global: Scope
-
-    public content = new Map<string, any>()
+    public type: ScopeType
+    public parents: Scope[]
+    public content = new Map<string, ESObject>()
 
     public constructor(type: ScopeType) {
         this.type = type
+        this.parents = type !== "global" ? [globalScope] : []
     }
 
-    public implementParents(...parent: Scope[]): Scope {
+    public importModule(module: Module): this {
+        Object.entries(module.exported).forEach(([key, value]) => {
+            this.set(key, value)
+        })
+        return this
+    }
+
+    public importParent(...parent: Scope[]): this {
         if (parent.length <= 0) return this
         parent.forEach((parent) => {
             this.parents.push(parent)
-            if (parent.type === 'global')
-                this.global = parent
         })
         return this
     }
@@ -32,7 +39,6 @@ export default class Scope {
     public copy(): Scope {
         const scope = new Scope(this.type)
         scope.parents = this.parents.slice(0)
-        scope.global = this.global
         return scope
     }
 
@@ -47,36 +53,35 @@ export default class Scope {
         return this.content.has(name)
     }
 
-    public get<T>(name: string): T | undefined {
+    public get(name: string): ESObject | undefined {
         if(!name) return undefined
         return this.content.get(name)
     }
 
-    public set<T>(name: string, value: T) {
+    public set(name: string, value: ESObject) {
         if(!name) return undefined
         return this.content.set(name, value)
     }
 
     public includes(name: string): Boolean {
         if(!name) return false
-        return this.reference<any>(name).has()
+        return this.reference(name).has()
     }
 
-    public reference<T>(name: string): ScopeReference<T> {
+    public reference(name: string): ScopeReference {
         const accessScope = this.has(name) ? this : (this.parents.find(parent => parent.includes(name)) || this)
         const defineScope = this.type === "intermediate" ? this : accessScope
         return {
             has() { return accessScope.has(name) },
-            get(): T { return accessScope.get(name) },
-            set(value) {
+            get(): ESObject | undefined { return accessScope.get(name) },
+            set<T extends ESObject>(value: T): T {
                 if(!accessScope.has(name))
                     defineScope.set(name, value)
                 else accessScope.set(name, value)
+                return value
             }
         }
     }
-
-
 }
 
-export const ScopeInternal = "$$" // Defines a value that can be accessed from anywhere in the program.
+export const globalScope = new Scope("global").importModule(GlobalModule());

@@ -1,13 +1,15 @@
-import ParserNode from "@nodes/ParserNode";
 import Span from "@shared/Span";
+import Expression from "@nodes/expression/Expression";
+import Statement from "@nodes/statement/Statement";
 
-export class ReturnStatement implements ParserNode {
+export class ReturnStatement extends Statement {
     public nodeType: string = "ReturnStatement"
-    public statement: ParserNode
+    public value: Expression
     public span: Span
 
-    constructor(statement: ParserNode, span: Span) {
+    constructor(value: Expression, span: Span) {
+        super();
         this.span = span
-        this.statement = statement
+        this.value = value
     }
 }

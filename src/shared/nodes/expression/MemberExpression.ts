@@ -1,0 +1,21 @@
+import ParserNode from "@nodes/ParserNode";
+import Span from "@shared/Span";
+import Tag from "@shared/Tag";
+import IdentifierExpression from "@nodes/expression/IdentifierExpression";
+import Expression from "@nodes/expression/Expression";
+
+export default class MemberExpression extends Expression {
+    public nodeType: string = "MemberExpression";
+    public left: ParserNode
+    public right: IdentifierExpression
+    public operator: Tag
+    public span: Span;
+
+    constructor(left: ParserNode, right: IdentifierExpression, operator: Tag, span: Span) {
+        super();
+        this.left = left
+        this.right = right
+        this.operator = operator
+        this.span = span
+    }
+}

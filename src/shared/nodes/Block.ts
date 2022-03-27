@@ -2,9 +2,11 @@ import ParserNode from "@nodes/ParserNode";
 import Span from "@shared/Span";
 
 export default class Block implements ParserNode {
-    nodeType: string = "Block"
-    span: Span
-    content: ParserNode[] = []
+    public nodeType: string = "Block"
+    public span: Span
+    public content: ParserNode[] = []
+
+    public static empty = new Block([], new Span())
 
     public constructor(content: ParserNode[], span: Span) {
         this.content = content

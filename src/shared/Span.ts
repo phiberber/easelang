@@ -4,6 +4,8 @@ export default class Span {
     public end: number = 0
     public indentation: number = 0
 
+    public static empty = new Span()
+
     constructor(index: number = 0, line: number = 0, end: number = 0, indentation: number = 0) {
         this.index = index
         this.line = line

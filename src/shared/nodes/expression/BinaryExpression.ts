@@ -1,16 +1,15 @@
 import Expression from "@nodes/expression/Expression";
-import ParserNode from "@nodes/ParserNode";
 import Span from "@shared/Span";
 import Tag from "@shared/Tag";
 
 export default class BinaryExpression extends Expression {
     public nodeType: string = "BinaryExpression";
     public operator: Tag
-    public left: ParserNode
-    public right: ParserNode
+    public left: Expression
+    public right: Expression
     public span: Span
 
-    constructor(operator: Tag, left: ParserNode, right: ParserNode, span: Span) {
+    constructor(operator: Tag, left: Expression, right: Expression, span: Span) {
         super()
         this.span = span
         this.operator = operator
