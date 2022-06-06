@@ -1,5 +1,6 @@
 # Build folders
 build/
+dist/
 
 # Package manager cache
 yarn.lock
