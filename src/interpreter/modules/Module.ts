@@ -1,16 +1,15 @@
-import {JavaScriptModule} from "@interpreter/modules/js";
-import {HttpModule} from "@interpreter/modules/http";
-import {GlobalModule} from "@interpreter/modules/global";
-import {BrowserModule} from "@interpreter/modules/browser";
+import {JavaScriptModule} from "@interpreter/modules/impl/jstd.ts"
+import {GlobalModule} from "@interpreter/modules/impl/global.ts"
 
 export class Module {
 
     public static list: Map<string, Module> = new Map()
     public name: string
-    public exported: { [key: string]: any }
+    public exported: { [key: string]: any } = {}
 
     static js: Module;
     static global: Module;
+    static browser: Module;
     static http: Module;
 
     public constructor(name: string, exportedNodes: { [key: string]: any }) {
@@ -32,6 +31,4 @@ export class Module {
 }
 
 Module.register(JavaScriptModule())
-Module.register(HttpModule())
 Module.register(GlobalModule())
-Module.register(BrowserModule())
