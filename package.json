@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "test": "esr test/http/http.ts",
-    "deploy:web": "mv test/web/ test/web/dist/ && npm run build && mv build dist/build",
+    "deploy:web": "mv test/web/ dist/ && npm run build && mv build dist/build",
     "bundle:cli": "esbuild ./src/Cli.ts --inject:src/interpreter/modules/nodeModules.ts --platform=node --bundle --outfile=build/ease.js",
     "bundle:lib": "esbuild ./src/Ease.ts --inject:src/interpreter/modules/browserModules.ts --platform=browser --bundle --outfile=build/ease.lib.js",
     "bundle": "npm run bundle:cli && npm run bundle:lib",
