@@ -1,0 +1,22 @@
+{
+  "hooks": {
+    "before:init": "npm run build"
+  },
+  "npm": {
+    "publish": false
+  },
+  "git": {
+    "changelog": "git log --pretty=format:\"* %s (%h)\" ${from}...${to}",
+    "commitMessage": "chore: release v${version}"
+  },
+  "github": {
+    "release": false,
+    "preRelease": true,
+    "releaseName": "Pre release ${version}",
+    "assets": [
+      "dist/ease-linux",
+      "dist/ease-macos",
+      "dist/ease-win.exe"
+    ]
+  }
+}
