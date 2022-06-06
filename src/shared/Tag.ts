@@ -5,12 +5,15 @@
  */
 
 export class Tag {
+
     public content: string | string[] | undefined
     public symbol: symbol
     public keyword: boolean
 
     static Space = this.create(" ", "Space")
     static Tab = this.create("\t", "Tab")
+
+    static Arrow = this.create("->", "Arrow")
 
     static OpenParenthesis = this.create("(", "Open Parenthesis")
     static CloseParenthesis = this.create(")", "Close Parenthesis")
@@ -39,6 +42,8 @@ export class Tag {
     static Pass = this.create("pass", "Pass", true)
     static Import = this.create("import", "Import", true)
     static While = this.create("while", "While", true)
+    static For = this.create("for", "For", true)
+    static When = this.create("when", "When", true)
     static Break = this.create("break", "Break", true)
     static Continue = this.create("continue", "Continue", true)
 
@@ -81,6 +86,12 @@ export class Tag {
     static Increment = this.create("++", "Increment")
     static Decrement = this.create("--", "Decrement")
 
+    static AssignPlus = this.create("+=", "Plus Assign")
+    static AssignMinus = this.create("-=", "Minus Assign")
+    static AssignMultiplied = this.create("*=", "Multiplied Assign")
+    static AssignDivided = this.create("/=", "Divided Plus")
+    static AssignRemained = this.create("%=", "Remained Plus")
+
     static Addition = this.create("+", "Addition")
     static Subtraction = this.create("-", "Subtraction")
     static Multiplication = this.create("*", "Multiplication")
@@ -91,29 +102,22 @@ export class Tag {
     static BooleanNot = this.create("!", "Boolean Not")
     static BooleanAnd = this.create("&&", "Boolean And")
 
-    static Less = this.create("<", "Less")
-    static Greater = this.create(">", "Greater")
-
     static LessOrEqual = this.create("<=", "Less or Equal")
     static GreaterOrEqual = this.create(">=", "Greater or Equal")
+
+    static Less = this.create("<", "Less")
+    static Greater = this.create(">", "Greater")
 
     static Equals = this.create("==", "Equals")
     static NotEquals = this.create("!=", "Not Equals")
 
     static Assign = this.create("=", "Assign")
 
-    static AssignPlus = this.create("+=", "Plus Assign")
-    static AssignMinus = this.create("-=", "Minus Assign")
-    static AssignMultiplied = this.create("*=", "Multiplied Assign")
-    static AssignDivided = this.create("/=", "Divided Plus")
-    static AssignRemained = this.create("%=", "Remained Plus")
-
-    static Boolean = this.create(["true", "false"], "Boolean")
-
-    static Identifier = this.create(undefined, "Identifier")
-    static String = this.create(undefined, "String")
     static Integer = this.create(undefined, "Integer")
     static Float = this.create(undefined, "Float")
+    static Identifier = this.create(undefined, "Identifier")
+    static Boolean = this.create(["true", "false"], "Boolean", true)
+    static String = this.create(undefined, "String")
 
     constructor(content: string | string[] | undefined, description: string, keyword: boolean = false) {
         this.content = content
@@ -128,7 +132,7 @@ export class Tag {
 
 export const Tags: Tag[] = Object.values(Tag)
 
-export const GreatnessTags = [Tag.Greater, Tag.GreaterOrEqual, Tag.Less, Tag.LessOrEqual]
+export const GreatnessTags = [Tag.GreaterOrEqual, Tag.Greater, Tag.LessOrEqual, Tag.Less]
 export const EqualityTags = [Tag.Equals, Tag.NotEquals]
 
 export const PrimaryArithmeticalTags = [Tag.Addition, Tag.Subtraction]
@@ -137,7 +141,7 @@ export const SecondaryArithmeticalTags = [Tag.Multiplication, Tag.Division, Tag.
 export const ArithmeticalTags = [Tag.Addition, Tag.Subtraction, Tag.Multiplication, Tag.Division, Tag.Remainer]
 
 export const PostUnaryTags = [Tag.Increment, Tag.Decrement]
-export const PreUnaryTags = [Tag.BooleanNot, Tag.Addition, Tag.Subtraction, ...PostUnaryTags]
+export const PreUnaryTags = [Tag.BooleanNot, Tag.Increment, Tag.Decrement, Tag.Addition, Tag.Subtraction, ...PostUnaryTags]
 export const AssignmentTags = [Tag.Assign, Tag.AssignPlus, Tag.AssignMinus, Tag.AssignMultiplied, Tag.AssignDivided, Tag.AssignRemained]
 export const ComparisonTags = GreatnessTags.concat(EqualityTags)
 

@@ -1,15 +1,10 @@
 import {Lexer} from "@front/lexer/Lexer";
 import {Parser} from "@front/parser/Parser";
 import {Interpreter} from "@interpreter/Interpreter";
-import {ESObject} from "@interpreter/memory/objects/ESObject";
 
-const logs = true
-const debug = false
-const printResult = true
+export function evaluate(code: TemplateStringsArray | string, logs: boolean = false, debug: boolean = false) {
 
-export function evaluate(code: TemplateStringsArray) {
-
-    const lexer = new Lexer(code.join("\n"))
+    const lexer = new Lexer(typeof code === "object" ? code.join("\n") : code)
     const lexerExecution = lexer.perform()
     logs && debug && console.log(lexerExecution.result)
 
@@ -30,11 +25,28 @@ export function evaluate(code: TemplateStringsArray) {
 
     let results: any[] = []
 
-    for(const index in execution.result) {
+    for (const index in execution.result) {
         const value = execution.result[index]
-        if(value instanceof ESObject) results.push(value.value)
+        results.push(value)
     }
 
-    return results.length === 1 ? results[0] : results
+    const totalExecutionTime = lexerExecution.time + parserExecution.time + execution.time
 
+    logs && console.log(`\nFinished execution, took ${totalExecutionTime}ms.`)
+
+    return results.length === 1 ? results[0] : results
+}
+
+if (typeof window !== "undefined") {
+    // @ts-ignore
+    window.Ease = { evaluate }
+    const easeScripts = [
+        ...document.querySelectorAll('script[type="text/ease"]'),
+        ...document.querySelectorAll('script[type="application/ease"]')
+    ]
+    for (const script of easeScripts) {
+        if(script.src) {
+            fetch(script.src).then(it => it.text().then(evaluate))
+        } else evaluate(script.innerHTML)
+    }
 }

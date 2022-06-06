@@ -11,11 +11,16 @@ export class MemberExpression extends Expression {
     public operator: Tag
     public span: Span;
 
-    constructor(left: ParserNode, right: IdentifierExpression, operator: Tag, span: Span) {
+    public constructor(left: ParserNode, right: IdentifierExpression, operator: Tag, span: Span) {
         super();
         this.left = left
         this.right = right
         this.operator = operator
         this.span = span
     }
+
+    public toString(): string {
+        return `${this.left}${this.operator.content}${this.right}`
+    }
+
 }

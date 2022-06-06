@@ -1,13 +1,14 @@
 import {BooleanLiteral} from "@nodes/literal/BooleanLiteral";
 import {Factor} from "@shared/Type";
-import {MemberExpression} from "@nodes/expression/MemberExpression";
 import {NumericLiteral} from "@nodes/literal/NumericLiteral";
-import {parseCallExpression} from "@front/parser/expressions/ParseCallExpression";
 import {parseIdentifier} from "@front/parser/expressions/ParseIdentifier";
 import {parseParenthesisExpression} from "@front/parser/expressions/ParseParenthesisExpression";
 import {Parser} from "@front/parser/Parser";
 import {StringLiteral} from "@nodes/literal/StringLiteral";
 import {Tag} from "@shared/Tag";
+import {parseArrayExpression} from "@front/parser/expressions/ParseArrayExpression";
+import {parseMemberExpression} from "@front/parser/expressions/ParseMemberExpression";
+import {parseCallExpression} from "@front/parser/expressions/ParseCallExpression";
 
 export function parseFactor(this: Parser): Factor | undefined {
     let node: Factor | undefined
@@ -25,26 +26,35 @@ export function parseFactor(this: Parser): Factor | undefined {
     } else if (this.accept(Tag.Boolean)) {
         node = new BooleanLiteral(this.look.content, this.look.span)
         this.match(Tag.Boolean)
-    } else if (this.accept(Tag.OpenParenthesis)) {
+    } else if (this.accept(Tag.OpenBrackets)) {
+        node = parseArrayExpression.call(this)
+    }  else if (this.accept(Tag.OpenParenthesis)) {
         node = parseParenthesisExpression.call(this)
     } else {
         identifier = this.accept(Tag.Identifier) ? parseIdentifier.call(this) : undefined
     }
 
-    while (this.expect(Tag.Identifier) && this.accept([Tag.Dot, Tag.ChainDot])) {
-        const dotToken = this.match([Tag.Dot, Tag.ChainDot])
-        const object = node ?? identifier ?? this.raise("A member expression requires a left side object.")
-        const property = parseIdentifier.call(this)
-        const memberSpan = object.span.copy().expandEnd(property.span)
-        node = new MemberExpression(object, property, dotToken.tag, memberSpan)
-    }
-
-    if (this.accept(Tag.OpenParenthesis)) {
-        if (!node && !identifier) this.raise("A function call must have a valid callee.")
-        node = parseCallExpression.call(this, node ?? identifier)
-    }
-
     if (!node && identifier) node = identifier
+
+    const expectCall = () => {
+        const lastToken = this.content[this.span.index - 1]
+        const lastTokenTag = lastToken?.tag
+        if (lastTokenTag !== Tag.Identifier && lastTokenTag !== Tag.CloseParenthesis) return
+        return this.accept([Tag.OpenParenthesis, Tag.OpenBraces])
+    }
+
+    const expectMember = () => this.expect(Tag.Identifier) && this.accept([Tag.Dot, Tag.ChainDot])
+
+    while (expectCall() || expectMember()) {
+        if (expectMember()) {
+            if (!node) this.raise("A member expression should requires a left side object")
+            node = parseMemberExpression.call(this, node!)
+        }
+        if (expectCall()) {
+            if (!node) this.raise("A function call must have a valid callee")
+            node = parseCallExpression.call(this, node!)
+        }
+    }
 
     return node
 }

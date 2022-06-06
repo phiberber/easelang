@@ -2,8 +2,10 @@
   "compilerOptions": {
     "strict": true,
     "baseUrl": ".",
+    "module": "ES6",
     "target": "ES6",
     "paths": {
+      "@/*": ["./src/*"],
       "@shared/*": ["./src/shared/*"],
       "@nodes/*": ["./src/shared/nodes/*"],
       "@misc/*": ["./src/shared/misc/*"],

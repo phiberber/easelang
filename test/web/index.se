@@ -1,0 +1,24 @@
+import browser
+
+let count = 0
+let body = document.body
+
+let countElement = document.createElement('span')
+let increaseElement = document.createElement('button')
+let decreaseElement = document.createElement('button')
+
+fun update(amount): countElement.innerText = count += amount
+
+fun increase(): update(1)
+fun decrease(): update(-1)
+
+update(0)
+
+increaseElement.onclick = increase
+decreaseElement.onclick = decrease
+increaseElement.innerHTML = '+'
+decreaseElement.innerHTML = '-'
+
+body.appendChild(increaseElement)
+body.appendChild(countElement)
+body.appendChild(decreaseElement)

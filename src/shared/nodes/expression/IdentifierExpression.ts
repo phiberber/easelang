@@ -18,4 +18,9 @@ export class IdentifierExpression extends Expression {
     public copy(): IdentifierExpression {
         return new IdentifierExpression(this.value, this.span);
     }
+
+    public toString(): string {
+        return this.value
+    }
+
 }

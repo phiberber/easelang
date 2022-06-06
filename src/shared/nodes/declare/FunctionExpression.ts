@@ -11,9 +11,9 @@ export class ParameterStatement extends VariableStatement {
     public identifier: IdentifierExpression;
     public span: Span;
     public initializer: Expression
-    public optional: Boolean
+    public optional: boolean
 
-    constructor(identifier: IdentifierExpression, initializer: Expression = Expression.empty, optional: Boolean = false, span: Span = Span.empty) {
+    constructor(identifier: IdentifierExpression, initializer: Expression = Expression.empty, optional: boolean = false, span: Span = Span.empty) {
         super(Tag.Constant, identifier, initializer, span);
         this.identifier = identifier
         this.initializer = initializer

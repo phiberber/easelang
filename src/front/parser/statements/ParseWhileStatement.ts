@@ -8,10 +8,10 @@ import {WhileStatement} from "@nodes/statement/WhileStatement";
 export function parseWhileStatement(this: Parser): WhileStatement {
     const startMatch = this.match(Tag.While)
 
-    this.match(Tag.OpenParenthesis)
+    this.skip(Tag.OpenParenthesis)
     const condition = parseExpression.call(this) ?? this.raise("Expected condition in while statement")
 
-    this.match(Tag.CloseParenthesis)
+    this.skip(Tag.CloseParenthesis)
     const block = parseBlock.call(this)
 
     let fallbackBlock: BlockExpression | undefined = undefined

@@ -1,0 +1,11 @@
+import js
+
+let squareRoot = Math.sqrt(5)
+let phi = (1 + squareRoot) / 2
+
+fun fib(n) {
+  let asymp = Math.pow(phi, n) / squareRoot
+  Math.round(asymp)
+}
+
+print(fib(1000))

@@ -3,6 +3,7 @@ import {Span} from "@shared/Span";
 import {Expression} from "@nodes/expression/Expression";
 
 export class BlockExpression extends Expression {
+
     public nodeType: string = "Block"
     public span: Span
     public content: ParserNode[] = []
@@ -18,4 +19,5 @@ export class BlockExpression extends Expression {
     public copy(): BlockExpression {
         return new BlockExpression(this.content, this.span.copy())
     }
+
 }

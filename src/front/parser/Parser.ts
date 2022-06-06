@@ -8,6 +8,7 @@ import {Tag} from "@shared/Tag";
 import {Token} from "@shared/Token";
 
 export class Parser implements ParserContext {
+
     public look: Token
     public content: Token[]
     public span: Span
@@ -18,9 +19,10 @@ export class Parser implements ParserContext {
         this.span = new Span(0, 0, this.content.length - 1, 0)
     }
 
-    public perform(): ProcessResult<AbstractParseTree> {
-        const startTime = new Date().getTime()
+    public perform(this: Parser): ProcessResult<AbstractParseTree> {
+
         const nodes: ParserNode[] = []
+        const startTime = new Date().getTime()
 
         while (this.look) {
             const statement = parseStatement.call(this)

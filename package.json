@@ -1,20 +1,23 @@
 {
   "name": "ease",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "description": "Ease Programming Language",
   "repository": "https://github.com/phiberber/ease.git",
   "author": "phiberber <phiberberian@gmail.com>",
+  "bin": "src/Ease.ts",
   "license": "MIT",
   "scripts": {
-    "test": "esr test/http.ts"
+    "test": "esr test/http/http.ts",
+    "bundle:cli": "esbuild ./src/Cli.ts --platform=node --bundle --outfile=build/ease.js",
+    "bundle:lib": "esbuild ./src/Ease.ts --platform=browser --bundle --outfile=build/ease.lib.js",
+    "bundle": "npm run bundle:cli && npm run bundle:lib",
+    "build": "npm run bundle && pkg --compress Brotli build/ease.js --out-path build"
   },
   "devDependencies": {
-    "@types/express": "^4.17.13",
-    "@types/node": "^16.11.6"
-  },
-  "dependencies": {
+    "@types/node": "^16.11.6",
     "esbuild": "^0.14.25",
     "esbuild-runner": "^2.2.1",
-    "express": "^4.17.3"
+    "express": "^4.18.1",
+    "pkg": "^5.7.0"
   }
 }

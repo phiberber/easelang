@@ -6,6 +6,7 @@ import {ProcessResult} from "@front/ProcessResult";
 import {Span} from "@shared/Span";
 import {Tag, Tags} from "@shared/Tag";
 import {Token} from "@shared/Token";
+import {isValidIdentifierCharacter} from "@misc/isValidIdentifier";
 
 export class Lexer implements LexerContext {
 
@@ -45,7 +46,8 @@ export class Lexer implements LexerContext {
             if (token.tag === Tag.String) {
                 tokenLength = token.content.length + 2
             } else if (token.tag === Tag.Boolean) {
-                tokenLength = token.content ? 4 : 5
+                tokenLength = token.content.length
+                token.content = token.content === 'true'
             } else if (token.tag === Tag.Integer || token.tag === Tag.Float) {
                 tokenLength = token.content.toString().length
             } else {
@@ -107,7 +109,7 @@ export class Lexer implements LexerContext {
                     // This is just a temporary work-around
                     if (tag.keyword) {
                         const nextChar = this.code.lowerCaseCode[this.span.index + tag.content.length]
-                        if ([' ', '\t', '\n', '\r', ':', ';'].includes(nextChar)) {
+                        if ([' ', '\t', '\n', '\r', ':', ';', '('].includes(nextChar)) {
                             token = this.createToken(tag.content, tag)
                             return true
                         }
@@ -180,13 +182,7 @@ export class Lexer implements LexerContext {
             const firstChar = name.charCodeAt(0)
             if (isNumber(firstChar)) return false
             const chars = name.split("")
-            return chars.every((char) => {
-                if (char === '$') return true
-                if (char === '_') return true
-                const charCode = char.codePointAt(0)
-                if (charCode == null) return false
-                return isNumber(charCode) || isUpperCase(charCode) || isLowerCase(charCode)
-            })
+            return chars.every(isValidIdentifierCharacter)
         }
 
         const {rawCode} = lexer.code
@@ -222,10 +218,12 @@ export class Lexer implements LexerContext {
             if (lowerCaseCode[quoteIndex - (index = quoteIndex)] !== '\\') break
         }
 
-        if (index === lexer.span.index)
+        if (index === lexer.span.index) {
             throw new Error("Expected a quote end, but found EOF.")
+        }
 
-        return lexer.createToken(lexer.code.rawCode.slice(lexer.span.index + 1, index), Tag.String)
+        const content = lexer.code.rawCode.slice(lexer.span.index + 1, index)
+        return lexer.createToken(content, Tag.String)
     }
 
 }

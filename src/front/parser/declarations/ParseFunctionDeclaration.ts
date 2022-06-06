@@ -43,7 +43,7 @@ export function parseFunctionDeclaration(this: Parser): FunctionExpression {
 
     this.match(Tag.CloseParenthesis)
 
-    if (this.accept(Tag.Colon)) block = parseBlock.call(this)
+    if (this.accept([Tag.Colon, Tag.OpenBraces])) block = parseBlock.call(this)
 
     const functionSpan = startMatch.span.copy().expandEnd(this.span)
     return new FunctionExpression(identifier, parameters, block, functionSpan)

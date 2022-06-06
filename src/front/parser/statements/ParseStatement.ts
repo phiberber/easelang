@@ -1,5 +1,4 @@
 import {parseClassDeclaration} from "@front/parser/declarations/ParseClassDeclaration";
-import {parseConditionalStatement} from "@front/parser/statements/ParseConditionalStatement";
 import {parseExpression} from "@front/parser/expressions/ParseExpression";
 import {parseFunctionDeclaration} from "@front/parser/declarations/ParseFunctionDeclaration";
 import {parseImport} from "@front/parser/statements/ParseImport";
@@ -30,11 +29,6 @@ export function parseStatement(this: Parser): ParserNode | undefined {
             return parseFunctionDeclaration.call(this)
         }
 
-    }
-
-    if (this.accept(Tag.If)) {
-        // Execute an If Statement
-        return parseConditionalStatement.call(this)
     }
 
     if (this.accept(Tag.Import)) {

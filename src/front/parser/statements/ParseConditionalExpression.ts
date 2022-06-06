@@ -1,15 +1,17 @@
-import {ConditionalStatement} from "@nodes/statement/ConditionalStatement";
+import {ConditionalExpression} from "@nodes/statement/ConditionalExpression";
 import {parseBlock} from "@front/parser/misc/ParseBlock";
 import {parseExpression} from "@front/parser/expressions/ParseExpression";
 import {Parser} from "@front/parser/Parser";
 import {Tag} from "@shared/Tag";
 
-export function parseConditionalStatement(this: Parser): ConditionalStatement {
+export function parseConditionalExpression(this: Parser): ConditionalExpression {
     const startMatch = this.match(Tag.If)
-    const elseStatements = []
+    const fallbackExpressions = []
 
     this.skip(Tag.OpenParenthesis)
     const condition = parseExpression.call(this)
+
+    if(condition == undefined) this.raise("Expected expression after if")
 
     this.skip(Tag.CloseParenthesis)
     const block = parseBlock.call(this)
@@ -18,17 +20,18 @@ export function parseConditionalStatement(this: Parser): ConditionalStatement {
         const elseMatch = this.match(Tag.Else)
         if (this.accept(Tag.If)) {
             const fallbackNode = this.match(Tag.If)
-            this.match(Tag.OpenParenthesis)
+            this.skip(Tag.OpenParenthesis)
             const fallbackCondition = parseExpression.call(this)
-            this.match(Tag.CloseParenthesis)
+            this.skip(Tag.CloseParenthesis)
             const fallbackBlock = parseBlock.call(this)
-            elseStatements.push(new ConditionalStatement(fallbackCondition, [], fallbackBlock, fallbackNode.span))
+            fallbackExpressions.push(new ConditionalExpression(fallbackCondition, [], fallbackBlock, fallbackNode.span))
         } else {
             const fallbackBlock = parseBlock.call(this)
-            elseStatements.push(new ConditionalStatement(undefined, [], fallbackBlock, elseMatch.span))
+            fallbackExpressions.push(new ConditionalExpression(undefined, [], fallbackBlock, elseMatch.span))
         }
     }
 
-    const ifSpan = startMatch.span.copy().expandEnd(this.span)
-    return new ConditionalStatement(condition, elseStatements, block, ifSpan)
+
+    const conditionalSpan = startMatch.span.copy().expandEnd(this.span)
+    return new ConditionalExpression(condition, fallbackExpressions, block, conditionalSpan)
 }

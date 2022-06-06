@@ -15,7 +15,7 @@ export function parseImport(this: Parser): ImportStatement {
     const imported: Token<string>[] = []
     let module
 
-    while(this.accept(Tag.Identifier)) {
+    while(this.accept(Tag.Identifier) && this.span.line == start.span.line) {
         imported.push(this.match(Tag.Identifier))
         this.skip(Tag.Comma)
     }

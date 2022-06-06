@@ -1,19 +1,19 @@
-import {ESObject} from "@interpreter/memory/objects/ESObject";
 import {Module} from "@interpreter/modules/Module";
 
 export type ScopeType = "global" | "intermediate" | "local"
 
 export interface ScopeReference {
-    get(): ESObject | undefined
-    set<T extends ESObject>(value: T): T
-    has(): Boolean
+    has(): boolean
+    delete(): boolean
+    get<T>(): T | undefined
+    set<T>(value: T): T
 }
 
 export class Scope {
 
     public type: ScopeType
     public parents: Scope[]
-    public content = new Map<string, ESObject>()
+    public content = new Map<string, any>()
 
     public constructor(type: ScopeType) {
         this.type = type
@@ -46,34 +46,36 @@ export class Scope {
         return this
     }
 
-    public has(name: string): Boolean {
+    public has(name: string): boolean {
         if(!name) return false
         if(!this.content) return false
         return this.content.has(name)
     }
 
-    public get(name: string): ESObject | undefined {
+    public get<T>(name: string): T | undefined {
         if(!name) return undefined
         return this.content.get(name)
     }
 
-    public set(name: string, value: ESObject) {
+    public delete(name: string): boolean {
+        if(!name) return false
+        return this.content.delete(name)
+    }
+
+    public set<T>(name: string, value: T | undefined) {
         if(!name) return undefined
+        if(value == null) return this.delete(name)
         return this.content.set(name, value)
     }
 
-    public includes(name: string): Boolean {
-        if(!name) return false
-        return this.reference(name).has()
-    }
-
     public reference(name: string): ScopeReference {
-        const accessScope = this.has(name) ? this : (this.parents.find(parent => parent.includes(name)) || this)
+        const accessScope = this.has(name) ? this : (this.parents.find(parent => parent.has(name)) || this)
         const defineScope = this.type === "intermediate" ? this : accessScope
         return {
-            has() { return accessScope.has(name) },
-            get(): ESObject | undefined { return accessScope.get(name) },
-            set<T extends ESObject>(value: T): T {
+            has(): boolean { return accessScope.has(name) },
+            delete(): boolean { return accessScope.delete(name) },
+            get<T>(): T | undefined { return accessScope.get(name) },
+            set<T>(value: T): T {
                 if(!accessScope.has(name))
                     defineScope.set(name, value)
                 else accessScope.set(name, value)
