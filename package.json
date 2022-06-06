@@ -1,6 +1,6 @@
 {
   "name": "ease",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Ease Programming Language",
   "repository": "https://github.com/phiberber/ease.git",
   "author": "phiberber <phiberberian@gmail.com>",
@@ -11,13 +11,10 @@
     "test:hello": "esr src/Cli.ts test/web/hello.se",
     "test:http": "esr src/Cli.ts test/web/http.se",
     "test:lucas": "esr src/Cli.ts test/web/lucas.se",
-
     "deploy:vercel": "cp -r test/web/ dist/ && npm run bundle:browser",
-
     "bundle:node": "esbuild ./src/Cli.ts --inject:src/interpreter/modules/nodeModules.ts --platform=node --bundle --outfile=dist/ease.js",
     "bundle:browser": "esbuild ./src/Ease.ts --inject:src/interpreter/modules/browserModules.ts --platform=browser --bundle --outfile=dist/ease-browser.js",
     "bundle": "npm run bundle:node && npm run bundle:browser",
-
     "build": "npm run bundle && pkg --compress Brotli dist/ease.js --out-path dist"
   },
   "devDependencies": {
@@ -42,7 +39,11 @@
       "release": false,
       "preRelease": true,
       "releaseName": "Pre release ${version}",
-      "assets": ["dist/ease-linux", "dist/ease-macos", "dist/ease-win.exe"]
+      "assets": [
+        "dist/ease-linux",
+        "dist/ease-macos",
+        "dist/ease-win.exe"
+      ]
     }
   }
 }
