@@ -16,7 +16,8 @@
     "bundle:browser": "esbuild ./src/Ease.ts --inject:src/interpreter/modules/browserModules.ts --platform=browser --bundle --outfile=dist/ease-browser.js",
     "bundle": "npm run bundle:node && npm run bundle:browser",
     "build": "npm run bundle && pkg --compress Brotli dist/ease.js --out-path dist",
-    "release": "release-it"
+    "release": "release-it --no-increment",
+    "release:increment": "release-it"
   },
   "devDependencies": {
     "@types/node": "^16.11.6",
