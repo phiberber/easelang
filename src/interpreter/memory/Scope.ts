@@ -64,7 +64,6 @@ export class Scope {
 
     public set<T>(name: string, value: T | undefined) {
         if(!name) return undefined
-        if(value == null) return this.delete(name)
         return this.content.set(name, value)
     }
 

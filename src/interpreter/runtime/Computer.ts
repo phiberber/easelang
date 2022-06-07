@@ -56,7 +56,7 @@ export function computeMemberExpression(expression: MemberExpression, scope: Sco
 export function computeIdentifierExpression(identifier: IdentifierExpression, scope: Scope): any {
     const reference = scope.reference(identifier.value)
     const object = reference.get()
-    if (object == null) throw new Error(`Variable "${identifier.value}" not found in the current scope.`)
+    if (!reference.has()) throw new Error(`Variable "${identifier.value}" not found in the current scope.`)
     return object
 }
 
