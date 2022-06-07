@@ -7,6 +7,7 @@ import {Tag} from "@shared/Tag";
 export function parseBlock(this: Parser, restriction: "Declare" | "" = ""): BlockExpression {
 
     const startMatch = this.skip([Tag.OpenBraces, Tag.Colon])
+    const bracesPrefix = startMatch?.tag === Tag.OpenBraces
     const startSpan = startMatch ? startMatch.span : this.span
     const statements: ParserNode[] = []
 
@@ -17,9 +18,9 @@ export function parseBlock(this: Parser, restriction: "Declare" | "" = ""): Bloc
             this.raise(`You can only use ${restriction} statements in this scope`)
         }
         statements.push(innerStatement)
-    } while (startMatch?.tag !== Tag.Colon && !this.accept(Tag.CloseBraces))
+    } while (bracesPrefix && !this.accept(Tag.CloseBraces))
 
-    this.skip(Tag.CloseBraces)
+    if(bracesPrefix) this.skip(Tag.CloseBraces)
 
     const blockSpan = startSpan.copy().expandEnd(this.span)
     return new BlockExpression(statements, blockSpan)
