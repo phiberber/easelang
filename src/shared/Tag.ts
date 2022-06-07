@@ -115,9 +115,9 @@ export class Tag {
 
     static Integer = this.create(undefined, "Integer")
     static Float = this.create(undefined, "Float")
-    static Identifier = this.create(undefined, "Identifier")
     static Boolean = this.create(["true", "false"], "Boolean", true)
     static String = this.create(undefined, "String")
+    static Identifier = this.create(undefined, "Identifier")
 
     constructor(content: string | string[] | undefined, description: string, keyword: boolean = false) {
         this.content = content
