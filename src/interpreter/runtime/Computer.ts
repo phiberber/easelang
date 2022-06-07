@@ -198,7 +198,9 @@ export function computeFunctionDeclaration(declaration: FunctionExpression, scop
                 if (!parameter.optional) throw new Error(`The function "${declaration.identifier.value}" has been called but it is missing the parameter "${parameter.identifier.value}".`)
                 args[index] = computeExpression(parameter.initializer, scope)
             }
-            functionScope.set(parameter.identifier.value, args[index])
+            if(args.length - 1 < index) {
+                functionScope.set(parameter.identifier.value, computeExpression(parameter.initializer, scope))
+            } else functionScope.set(parameter.identifier.value, args[index])
         })
         return computeBlock(declaration.content, functionScope)
     }

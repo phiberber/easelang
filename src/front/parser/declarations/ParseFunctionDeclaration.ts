@@ -31,6 +31,8 @@ export function parseFunctionDeclaration(this: Parser): FunctionExpression {
         }
 
         if(this.skip(Tag.Assign)) {
+            dynamic = true
+            parameterOptional = true
             parameterDefault = parseSimpleExpression.call(this)
             parameterDefault || this.raise("Expected parameter default value to be a simple expression.")
         }
