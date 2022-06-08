@@ -9,6 +9,9 @@ import {Tag} from "@shared/Tag";
 import {parseArrayExpression} from "@front/parser/expressions/ParseArrayExpression";
 import {parseMemberExpression} from "@front/parser/expressions/ParseMemberExpression";
 import {parseCallExpression} from "@front/parser/expressions/ParseCallExpression";
+import { MemberExpression } from "@/shared/nodes/expression/MemberExpression";
+import { FunctionExpression } from "@/shared/nodes/declare/FunctionExpression";
+import { CallExpression } from "@/shared/nodes/expression/CallExpression";
 
 export function parseFactor(this: Parser): Factor | undefined {
     let node: Factor | undefined
@@ -39,11 +42,16 @@ export function parseFactor(this: Parser): Factor | undefined {
     const expectCall = () => {
         const lastToken = this.content[this.span.index - 1]
         const lastTokenTag = lastToken?.tag
-        if (lastTokenTag !== Tag.Identifier && lastTokenTag !== Tag.CloseParenthesis) return
-        return this.accept([Tag.OpenParenthesis, Tag.OpenBraces])
+        if(
+            node instanceof MemberExpression ||
+            node instanceof CallExpression ||
+            lastTokenTag === Tag.Identifier
+        ) {
+            return this.accept([Tag.OpenParenthesis, Tag.OpenBraces])
+        } else return false
     }
 
-    const expectMember = () => this.expect(Tag.Identifier) && this.accept([Tag.Dot, Tag.ChainDot])
+    const expectMember = () => this.accept([Tag.Dot, Tag.ChainDot])
 
     while (expectCall() || expectMember()) {
         if (expectMember()) {
