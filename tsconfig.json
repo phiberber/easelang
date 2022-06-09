@@ -3,7 +3,7 @@
     "strict": true,
     "baseUrl": ".",
     "sourceRoot": ".",
-    "module": "ES6",
+    "module": "CommonJS",
     "target": "ESNext",
     "paths": {
       "@/*": ["./src/*"],
@@ -14,6 +14,7 @@
       "@back/*": ["./src/back/*"],
       "@interpreter/*": ["./src/interpreter/*"]
     },
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true
   },
@@ -23,7 +24,7 @@
       "rootDir": ".",
       "sourceRoot": ".",
       "module": "CommonJS",
-      "target": "ES3",
+      "target": "ES5",
       "incremental": true,
       "moduleResolution": "Node",
       "resolveJsonModule": true,
