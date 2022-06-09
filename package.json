@@ -4,26 +4,31 @@
   "description": "Ease Programming Language",
   "repository": "https://github.com/phiberber/ease.git",
   "author": "phiberber <phiberberian@gmail.com>",
-  "bin": "src/Ease.ts",
+  "bin": {
+    "ease": "src/cli/index.ts"
+  },
   "license": "MIT",
   "scripts": {
-    "test:fibonacci": "esr src/Cli.ts test/fibonacci.se",
-    "test:hello": "esr src/Cli.ts test/hello.se",
-    "test:http": "esr src/Cli.ts test/http.se",
-    "test:lucas": "esr src/Cli.ts test/lucas.se",
-    "deploy:vercel": "cp -r test/web/ dist/ && npm run bundle:browser",
-    "bundle:node": "esbuild ./src/Cli.ts --inject:src/interpreter/modules/nodeModules.ts --platform=node --bundle --outfile=dist/ease.js",
-    "bundle:browser": "esbuild ./src/Ease.ts --inject:src/interpreter/modules/browserModules.ts --platform=browser --bundle --outfile=dist/ease-browser.js",
+    "postinstall": "npm link",
+    "test": "npx uvu -r tsconfig-paths/register -r ts-node/register ./src/test/",
+    "sample": "ease sample.se",
+    "deploy:vercel": "rm -rf dist/ && cp -r src/examples/web/ dist/ && npm run bundle:browser",
+    "bundle:node": "esbuild src/cli.ts --inject:src/lang/interpreter/modules/nodeModules.ts --platform=node --bundle --outfile=dist/ease.js",
+    "bundle:browser": "esbuild ./src/Ease.ts --inject:src/lang/interpreter/modules/browserModules.ts --platform=browser --bundle --outfile=dist/ease-browser.js",
     "bundle": "npm run bundle:node && npm run bundle:browser",
     "build": "npm run bundle && pkg --compress Brotli dist/ease.js --out-path dist",
     "release": "release-it --no-increment",
     "release:increment": "release-it"
   },
   "devDependencies": {
+    "@swc/core": "^1.2.197",
     "@types/node": "^16.11.6",
     "esbuild": "^0.14.25",
-    "esbuild-runner": "^2.2.1",
     "express": "^4.18.1",
-    "pkg": "^5.7.0"
+    "pkg": "^5.7.0",
+    "regenerator-runtime": "^0.13.9",
+    "ts-node": "^10.8.1",
+    "tsconfig-paths": "^4.0.0",
+    "uvu": "^0.5.3"
   }
 }

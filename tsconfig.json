@@ -2,6 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "baseUrl": ".",
+    "sourceRoot": ".",
     "module": "ES6",
     "target": "ESNext",
     "paths": {
@@ -13,6 +14,22 @@
       "@back/*": ["./src/back/*"],
       "@interpreter/*": ["./src/interpreter/*"]
     },
+    "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "alwaysStrict": true,
+      "rootDir": ".",
+      "sourceRoot": ".",
+      "module": "CommonJS",
+      "target": "ES3",
+      "incremental": true,
+      "moduleResolution": "Node",
+      "resolveJsonModule": true,
+      "pretty": true
+    },
+    "transpileOnly": true,
+    "transpiler": "ts-node/transpilers/swc"
   }
 }

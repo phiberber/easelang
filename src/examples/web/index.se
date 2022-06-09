@@ -1,0 +1,30 @@
+import browser
+
+fun h(tag, content, parent = document.body): with(document.createElement(tag)) { node ->
+  node.innerHTML = content
+  parent.appendChild(node)
+}
+
+let count = 0
+let body = document.body
+
+let titleElement = h('h1', "👋 Yo, I'm alive!")
+let descriptionElement = h('p', "This is a counter example written fully in Ease, it has been deployed to Vercel with a perfect Lighthouse performance score")
+let descriptionEmojiElement = h('span', ' 🤯.', descriptionElement)
+let wrapper = h('div', '')
+
+with(h('a', '@phiberber/ease')) { githubElement ->
+    githubElement.href = 'https://github.com/phiberber/ease'
+    githubElement.target = '_blank'
+}
+
+fun update(amount): countElement.innerText = count += amount
+fun increase(): update(1)
+fun decrease(): update(-1)
+
+let increaseElement = h('button', '+', wrapper)
+let countElement = h('span', 0, wrapper)
+let decreaseElement = h('button', '-', wrapper)
+
+increaseElement.onclick = increase
+decreaseElement.onclick = decrease

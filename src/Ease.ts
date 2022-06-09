@@ -1,8 +1,17 @@
-import {Lexer} from "@front/lexer/Lexer";
-import {Parser} from "@front/parser/Parser";
-import {Interpreter} from "@interpreter/Interpreter";
+import {Lexer} from "@/lang/front/lexer/Lexer";
+import {Parser} from "@/lang/front/parser/Parser";
+import {Interpreter} from "@/lang/interpreter/Interpreter";
+import {Scope} from "@/lang/interpreter/memory/Scope";
 
-export function evaluate(code: TemplateStringsArray | string, logs: boolean = false, debug: boolean = false) {
+interface EvaluationConfig {
+    logs?: boolean
+    debug?: boolean
+}
+
+export function evaluate(code: TemplateStringsArray | string, scope: Scope = undefined, evaluationConfig: EvaluationConfig = {}): any[] | any {
+
+    const logs = evaluationConfig?.logs ?? false
+    const debug = evaluationConfig?.debug ?? false
 
     const lexer = new Lexer(typeof code === "object" ? code.join("\n") : code)
     const lexerExecution = lexer.perform()
@@ -19,7 +28,7 @@ export function evaluate(code: TemplateStringsArray | string, logs: boolean = fa
     logs && console.log('Initializing Interpreter')
 
     const interpreter = new Interpreter(parserExecution.result)
-    const execution = interpreter.perform()
+    const execution = interpreter.perform(scope)
 
     logs && console.log(`Interpreting took ${execution.time}ms to finish.`)
 
