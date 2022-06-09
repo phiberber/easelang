@@ -13,7 +13,7 @@
     "test": "npx uvu -r tsconfig-paths/register -r ts-node/register ./src/test/",
     "sample": "ease sample.se",
     "deploy:vercel": "rm -rf dist/ && cp -r src/examples/web/ dist/ && npm run bundle:browser",
-    "bundle:node": "esbuild src/cli.ts --inject:src/lang/interpreter/modules/nodeModules.ts --platform=node --bundle --outfile=dist/ease.js",
+    "bundle:node": "esbuild src/cli/index.ts --inject:src/lang/interpreter/modules/nodeModules.ts --platform=node --bundle --outfile=dist/ease.js",
     "bundle:browser": "esbuild ./src/Ease.ts --inject:src/lang/interpreter/modules/browserModules.ts --platform=browser --bundle --outfile=dist/ease-browser.js",
     "bundle": "npm run bundle:node && npm run bundle:browser",
     "build": "npm run bundle && pkg --compress Brotli dist/ease.js --out-path dist",
