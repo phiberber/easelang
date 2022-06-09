@@ -12,7 +12,7 @@
   "github": {
     "release": false,
     "preRelease": true,
-    "releaseName": "Pre release ${version}",
+    "releaseName": "Pre Release ${version}",
     "assets": [
       "dist/ease-linux",
       "dist/ease-macos",
