@@ -1,5 +1,5 @@
 #!/usr/bin/env -S node -r tsconfig-paths/register -r "ts-node/register"
-import * as info from "/package.json"
+import * as info from "@/../package.json"
 import {evaluate} from "@/Ease";
 import * as fs from "fs"
 
